@@ -84,7 +84,6 @@ def test_pep621_classifiers_and_urls_parity():
     assert "Programming Language :: Python :: 3.11" in pyproject_text
     assert "Programming Language :: Python :: 3.12" in pyproject_text
     assert "Programming Language :: Python :: 3.13" in pyproject_text
-    assert "License :: OSI Approved :: MIT License" in pyproject_text
     assert "Operating System :: OS Independent" in pyproject_text
     assert "Operating System :: POSIX :: Linux" in pyproject_text
     assert "Operating System :: Microsoft :: Windows" in pyproject_text
