@@ -100,7 +100,7 @@ class ClaudeRunner:
 
     def run(self, prompt, **overrides):
         """
-        Fuehrt einen Claude-Aufruf aus.
+        Führt einen Claude-Aufruf aus.
 
         Returns:
             dict mit keys: success, output, stderr, returncode, duration_s
@@ -172,7 +172,7 @@ class ClaudeRunner:
         Args:
             prompts: Liste von Prompt-Strings oder Liste von Dicts mit {prompt, **overrides}
             max_workers: Maximale Anzahl paralleler Worker
-            **overrides: Default-Overrides fuer alle Aufrufe
+            **overrides: Default-Overrides für alle Aufrufe
 
         Returns:
             Liste von Result-Dicts (gleiche Struktur wie run())
@@ -258,7 +258,7 @@ class AgentRunner:
         except ImportError as error:
             raise RuntimeError(
                 "This backend requires COMA. Install swarm-ai with the "
-                "'providers' extra or install https://github.com/dev-bricks/coma."
+                "'providers' extra or install https://github.com/ellmos-ai/coma."
             ) from error
 
         adapter_options = {"timeout": timeout, "cwd": cwd}

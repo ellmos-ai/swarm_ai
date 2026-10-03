@@ -55,7 +55,7 @@ COST_PER_1M = {
 }
 
 RUNS_TABLE = "parallel_chunks_runs"
-# Abgeloester Name des Musters (bis 2026-06-17). Nur noch fuer die Uebernahme
+# Abgelöster Name des Musters (bis 2026-06-17). Nur noch für die Übernahme
 # von Alt-Datenbanken vorgehalten, siehe _migrate_legacy_runs().
 LEGACY_RUNS_TABLE = "epstein_runs"
 
@@ -152,7 +152,7 @@ class ChunkSummarizer:
         """Create the standalone chunk and run tables when absent.
 
         Returns:
-            Anzahl der aus der Legacy-Tabelle uebernommenen Laeufe (0, wenn
+            Anzahl der aus der Legacy-Tabelle übernommenen Läufe (0, wenn
             keine Alt-Datenbank vorliegt oder migrate_legacy=False).
         """
         self.db_path.parent.mkdir(parents=True, exist_ok=True)
@@ -188,21 +188,21 @@ class ChunkSummarizer:
 
     @staticmethod
     def _migrate_legacy_runs(conn: sqlite3.Connection) -> int:
-        """Uebernimmt Run-Protokolle aus der abgeloesten Tabelle epstein_runs.
+        """Übernimmt Run-Protokolle aus der abgelösten Tabelle epstein_runs.
 
-        Datenbanken aus der Zeit vor der Umbenennung (2026-06-17) fuehren ihre
-        Laeufe in epstein_runs. Ohne diesen Schritt legt initialize_schema
-        daneben eine leere parallel_chunks_runs an -- die Altlaeufe blieben
-        zwar auf der Platte, waeren fuer jede Abfrage aber unsichtbar.
+        Datenbanken aus der Zeit vor der Umbenennung (2026-06-17) führen ihre
+        Läufe in epstein_runs. Ohne diesen Schritt legt initialize_schema
+        daneben eine leere parallel_chunks_runs an -- die Alt-Läufe blieben
+        zwar auf der Platte, wären für jede Abfrage aber unsichtbar.
 
-        Idempotent: je (started_at, llm_model) wird gezaehlt, wie viele Laeufe
-        im Ziel schon stehen; uebernommen wird nur der Ueberhang. Ein zweiter
-        Aufruf traegt daher nichts nach, zwei echte Altlaeufe mit gleichem
+        Idempotent: je (started_at, llm_model) wird gezählt, wie viele Läufe
+        im Ziel schon stehen; übernommen wird nur der Überhang. Ein zweiter
+        Aufruf trägt daher nichts nach, zwei echte Alt-Läufe mit gleichem
         Zeitstempel und Modell bleiben aber beide erhalten. Die Legacy-Tabelle
-        wird nicht veraendert und nicht geloescht.
+        wird nicht verändert und nicht gelöscht.
 
         Returns:
-            Anzahl der uebernommenen Zeilen.
+            Anzahl der übernommenen Zeilen.
         """
         exists = conn.execute(
             "SELECT 1 FROM sqlite_master WHERE type='table' AND name=?",
@@ -225,10 +225,10 @@ class ChunkSummarizer:
         available = [name for name in known if name in columns]
         select_cols = ", ".join(available)
 
-        # Nach (started_at, llm_model) gruppieren. Der Abgleich zaehlt je Gruppe,
-        # statt nur "existiert schon" zu fragen: so ueberlebt auch der Fall, dass
-        # eine Alt-Datenbank zwei echte Laeufe mit identischem Zeitstempel und
-        # Modell enthaelt -- sonst ginge der zweite still verloren.
+        # Nach (started_at, llm_model) gruppieren. Der Abgleich zählt je Gruppe,
+        # statt nur "existiert schon" zu fragen: so überlebt auch der Fall, dass
+        # eine Alt-Datenbank zwei echte Läufe mit identischem Zeitstempel und
+        # Modell enthält -- sonst ginge der zweite still verloren.
         groups: Dict[tuple, List[tuple]] = {}
         for row in conn.execute(
             f"SELECT {select_cols} FROM {LEGACY_RUNS_TABLE} ORDER BY rowid ASC"
@@ -559,11 +559,11 @@ class ChunkSummarizer:
             costs = COST_PER_1M.get(self.model, COST_PER_1M["haiku"])
             est_cost = (est_input_tokens * costs["input"] + est_output_tokens * costs["output"]) / 1_000_000
 
-            print("[DRY-RUN] Kosten-Schaetzung:")
+            print("[DRY-RUN] Kosten-Schätzung:")
             print(f"  Input-Tokens:  ~{est_input_tokens}")
             print(f"  Output-Tokens: ~{est_output_tokens}")
             print(f"  Gesamt-Zeichen: {total_chars}")
-            print(f"  Geschaetzte Kosten: ${est_cost:.4f}")
+            print(f"  Geschätzte Kosten: ${est_cost:.4f}")
             print("\n  Erste 5 Chunks:")
             for c in chunks[:5]:
                 preview = c['chunk_text'][:60].replace('\n', ' ')
@@ -698,8 +698,8 @@ def main() -> int:
         print(f"Datenbank initialisiert: {summarizer.db_path}")
         if migrated:
             print(
-                f"{migrated} Lauf/Laeufe aus {LEGACY_RUNS_TABLE} nach "
-                f"{RUNS_TABLE} uebernommen (Legacy-Tabelle bleibt erhalten)."
+                f"{migrated} Lauf/Läufe aus {LEGACY_RUNS_TABLE} nach "
+                f"{RUNS_TABLE} übernommen (Legacy-Tabelle bleibt erhalten)."
             )
         return 0
     stats = summarizer.run(

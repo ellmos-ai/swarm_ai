@@ -1,123 +1,47 @@
-# swarm-ai - LLM Swarm Intelligence Toolkit
-
-## Last-checked: 2026-09-16
-Version: 0.1.3
+# swarm-ai — information for language models and tooling
 
 Canonical repository: https://github.com/ellmos-ai/swarm_ai
 
-swarm-ai is a local-first Python toolkit for parallel LLM and Claude agent orchestration. It implements five coordination patterns for running one task through multiple model instances and combining the results: parallel chunk processing, boss/worker hierarchy, stigmergy, consensus voting, and specialist routing.
+`pyproject.toml` declares source version `0.1.3`. This declaration does not itself mean that a package has been published.
 
-The project is part of the ellmos family and open-bricks umbrella ecosystem. It is distinct from Docker Swarm, hosted agent platforms, and generic "AI swarm" demos. Its public surface is a small set of inspectable Python tools, JSON chain definitions, benchmark data, and German design documents.
+## What the project contains
 
-## Audience
+swarm-ai is a Python toolkit with CLI entry points and examples for multi-agent coordination:
 
-- Developers experimenting with Claude Code or Anthropic API fan-out.
-- LLM-tool builders who need a small local multi-agent pattern library.
-- Researchers comparing sequential and parallel model-call workflows.
-- Agents and crawlers indexing the ellmos local-first agent ecosystem.
-- Maintainers deciding whether to use BACH, Rinnsal, clutch, MarbleRun, or swarm-ai.
+- Parallel chunk processing: `tools/translate_swarm.py`, `tools/summarize_chunks.py`
+- Majority voting and result aggregation: `tools/consensus_swarm.py`
+- Local SQLite marker storage: `tools/stigmergy_api.py`, `tools/stigmergy_init.py`
+- Claude CLI and optional provider integration: `tools/runner.py`
+- JSON-based hierarchy and specialist routing examples under `tools/`
 
-## Primary Use Cases
+These are libraries and examples, not a hosted agent service or production reliability guarantee.
 
-- Parallel LLM execution for chunked translation and summarization.
-- Consensus voting for factual checks, classification, and quality control.
-- SQLite-backed stigmergy experiments where agents leave pheromone-like path markers.
-- Boss/worker and specialist routing experiments through JSON chain definitions.
-- Benchmarking sequential versus parallel model calls.
+## Data flow and limits
 
-## Implemented Patterns
+- SQLite coordination state is stored locally. Calls to Anthropic, Claude CLI, COMA-connected providers, or other configured services can send prompts and request data externally.
+- `confidence` in consensus results is the winner count divided by all returned results, including failed results. `agreement_ratio` is calculated over valid answers. These values are not calibrated probabilities; a majority does not establish factual correctness.
+- Team-lock claims are cooperative file-based coordination signals. Processes that ignore or edit the protocol can bypass them.
+- Consensus, translation, and summarization require positive finite estimated-cost caps. `ClaudeRunner` has an optional cap; no single universal cap applies to every provider or workflow.
+- The application runs with the caller's environment and permissions. `RunAsInvoker` is not an OS sandbox and does not guarantee non-elevation.
+- The translation tool supports target text languages `de`, `en`, `es`, `zh`, `ja`, and `ru`. These are translation targets, not six localized UI languages. CLI help mixes English and German; the experimental Tk GUI has German labels.
 
-- Parallel chunks: split work, process chunks concurrently, merge output.
-- Hierarchy / boss + worker: coordinator dispatches tasks, workers execute, aggregator merges.
-- Stigmergy / pheromone paths: indirect coordination through a SQLite-backed marker store.
-- Consensus / majority vote: several agents answer independently; the tool computes agreement and confidence.
-- Specialist / boss routing: a planner routes work to domain-specific expert roles.
+## Useful files
 
-## Governance & Runtime Invariants
+- `README.md` and `README_de.md`: project overview and usage examples
+- `SECURITY.md`: data flow, execution limits, and private vulnerability-reporting channels
+- `THIRD_PARTY_LICENSES.md`: selected declared dependencies; not a transitive dependency audit
+- `TODO.md`: current open tasks under `## Offene Aufgaben`
+- `CHANGELOG.md`: historical changes; older statements may be superseded by later clarification
+- `PYPI_RELEASE.md`: packaging and release checklist
+- `results/benchmark_20260306.json`: one historical benchmark run; not a general performance claim
+- `results/benchmark_20260813.json`: a dry-run record for the benchmark catalog
 
-The architecture enforces 10 strict runtime guarantees (INV-LOCAL-01 to INV-SLA-10):
-- INV-LOCAL-01: 100% Local-First & Zero-Egress (no tracking, local SQLite stores)
-- INV-RUNAS-02: Unprivileged User Mode (RunAsInvoker, zero elevated rights)
-- INV-BUDGET-03: Fail-Closed Budgeting (strict USD, token, and call limits)
-- INV-STORE-04: SQLite Stigmergy Store (atomic transactions, schema stability)
-- INV-CHUNKS-05: Parallel Chunks Pattern (deterministic key/namespace merge)
-- INV-HIERARCH-06: Boss / Worker Hierarchy (isolated worker error domains)
-- INV-VOTE-07: Consensus & Majority Vote (statistical confidence & voting)
-- INV-ROUTER-08: Specialist Routing & COMA Bridge (modular provider routing)
-- INV-LOCK-09: Team Lock Guardrail (concurrency & race-condition prevention)
-- INV-SLA-10: 48h Security Response & 5-Day Triage SLA (SECURITY.md)
+## Verification
 
-## Important Files
+CI configuration covers Ubuntu, Windows, and macOS with Python 3.10–3.13. Consult the current repository workflow for live results; this file does not publish a static test count or audit status. The repository's `LICENSE` is MIT. Third-party components have separate terms and notices.
 
-- README.md: English public overview, quick start, architecture Mermaid diagrams, benchmark summary, related projects.
-- README_de.md: German public overview with correct Umlaute and system architecture.
-- tools/runner.py: Claude CLI wrapper with `run_parallel()`.
-- tools/consensus_swarm.py: Anthropic API consensus swarm CLI and Python API.
-- tools/stigmergy_api.py: SQLite-backed pheromone coordination API.
-- tools/translate_swarm.py: parallel translation pattern.
-- tools/summarize_chunks.py: parallel summarization pattern.
-- tools/benchmark.py: sequential versus parallel benchmark runner.
-- tools/swarm_haiku_3.json: hierarchy chain definition.
-- tools/swarm_haiku_research.json: specialist research chain definition.
-- konzepte/team-lock-verfahren.md: portable project-local coordination guardrail for shared-file swarm work.
-- results/benchmark_20260306.json: benchmark snapshot used in README.
-- results/benchmark_20260813.json: cost-free current benchmark dry-run with model pricing and reproducibility metadata.
-- PYPI_RELEASE.md: distribution name, PEP-440 versioning, CLI entry points, and the readback-gated release checklist.
-- SECURITY.md: bilingual security policy, local-first & zero-egress architecture, and vulnerability reporting contacts.
-- THIRD_PARTY_LICENSES.md: inventory of third-party open-source components and licenses.
-- MARKETING-LOG.txt: marketing personas, discoverability audit, and architectural invariants.
-- tests/test_metadata.py: automated metadata and manifest parity test suite.
+## Related projects
 
-## Verification State
-
-- Local test suite: 220 pytest tests passed, 100% green.
-- Core lint/compile/security gates: Ruff, compileall, Bandit high severity.
-- Historical experiments require explicit modes, finite per-agent/total budgets, safe mode, and validated fixture targets; they never modify user memory files.
-- Python requirement: 3.10+.
-- Runtime dependency: `anthropic`.
-- CLI/API calls require `ANTHROPIC_API_KEY`.
-- `ClaudeRunner` examples require a configured `claude` CLI.
-- No PyPI package release yet.
-- The PEP-621 packaging contract is defined, but no PyPI upload has occurred.
-- No graphical UI, screenshot, or hosted landing page.
-
-## Related ellmos Projects
-
-- BACH: https://github.com/ellmos-ai/bach - full text-based OS for LLM agents.
-- USMC: https://github.com/ellmos-ai/usmc - local SQLite memory primitive for LLM agents.
-- Rinnsal: https://github.com/ellmos-ai/rinnsal - lightweight LLM agent infrastructure.
-- clutch: https://github.com/ellmos-ai/clutch - provider-neutral routing for a single task.
-- MarbleRun: https://github.com/ellmos-ai/MarbleRun - chain execution for sequential agent loops.
-- policy-registry: https://github.com/ellmos-ai/policy-registry - policy governance and security authority.
-- system-explorer: https://github.com/ellmos-ai/system-explorer - modular environment scanner.
-- sqlite-transit-sync: https://github.com/ellmos-ai/sqlite-transit-sync - SQLite transit synchronization.
-- workflowhooker: https://github.com/ellmos-ai/workflowhooker - workflow automation hook manager.
-- Skills: https://github.com/ellmos-ai/skills - portable skill library.
-
-## Search Phrases
-
-```text
-ellmos-ai swarm-ai
-ellmos-ai/swarm-ai
-Claude agent orchestration Python swarm
-parallel LLM consensus voting toolkit
-SQLite stigmergy agent coordination
-local-first multi-agent LLM orchestration
-boss worker LLM agents Python
-specialist routing LLM agents
-Anthropic API consensus swarm
-Claude CLI parallel prompts
-```
-
-## Discovery Keywords
-
-LLM swarm intelligence, multi-agent orchestration, Claude agent orchestration, parallel LLM calls, consensus swarm, consensus voting, stigmergy AI, pheromone coordination, SQLite agent memory, local-first agent toolkit, Python LLM agents, boss worker agents, specialist agent routing, team locks, agent benchmark, Anthropic API, Claude CLI.
-
-## Disambiguation
-
-- Not Docker Swarm.
-- Not a hosted agent platform.
-- Not the `kyegomez/swarms` package or Swarms AI enterprise product.
-- Not OpenAI Swarm.
-- Not a generic agent-swarm marketing demo.
-- Use `ellmos-ai/swarm-ai` for the canonical repository and `swarm-ai` for the project name.
+- [COMA](https://github.com/ellmos-ai/coma): optional Spawner/adapter provider bridge used by Swarm when the `providers` extra is installed.
+- [Roshambo](https://github.com/ellmos-ai/roshambo): separate toolkit for coordinating independently launched agents through serializable leases and outcome memory.
+- [MarbleRun](https://github.com/ellmos-ai/marblerun): separate toolkit for configuring multi-agent chains.

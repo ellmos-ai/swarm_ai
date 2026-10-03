@@ -35,11 +35,17 @@ jobs:
           cache-dependency-path: |
             requirements.txt
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          python -m pip install -r requirements.txt pytest ruff
-          python -m pip install "coma @ git+https://github.com/dev-bricks/coma.git"
+      - name: Upgrade pip
+        run: python -m pip install --upgrade pip
+
+      - name: Install project dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Install test and lint tools
+        run: python -m pip install pytest ruff
+
+      - name: Install optional COMA provider
+        run: python -m pip install "coma @ git+https://github.com/ellmos-ai/coma.git"
 
       - name: Lint core and tests
         run: python -m ruff check tools tests
@@ -51,6 +57,67 @@ jobs:
         env:
           PYTHONIOENCODING: utf-8
         run: python -m pytest -ra -v
+
+  package-smoke:
+    name: Package smoke (Python ${{ matrix.python_version }}, setuptools ${{ matrix.backend_label }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - python_version: "3.10"
+            backend_label: "77.0.3 minimum"
+            setuptools_spec: "setuptools==77.0.3"
+          - python_version: "3.13"
+            backend_label: "current"
+            setuptools_spec: "setuptools>=77.0.3"
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: ${{ matrix.python_version }}
+
+      - name: Upgrade pip
+        run: python -m pip install --upgrade pip
+
+      - name: Install selected backend and packaging checks
+        run: python -m pip install --upgrade "${{ matrix.setuptools_spec }}" wheel build twine
+
+      - name: Print selected setuptools version
+        run: python -c "import setuptools; print(setuptools.__version__)"
+
+      - name: Build source distribution and wheel without isolation
+        run: python -m build --no-isolation --outdir dist
+
+      - name: Check wheel and source distribution metadata
+        run: python -m twine check dist/*
+
+      - name: Verify artifacts, packaged JSON, license bytes, and private-file exclusion
+        run: python scripts/check_distribution.py dist
+
+      - name: Install wheel outside the checkout
+        shell: bash
+        working-directory: ${{ runner.temp }}
+        run: python -m pip install "$GITHUB_WORKSPACE"/dist/*.whl
+
+      - name: Verify installed package comes from the environment
+        shell: bash
+        working-directory: ${{ runner.temp }}
+        run: python -c 'import importlib.metadata as metadata; import tools; from pathlib import Path; imported = Path(tools.__file__).resolve(); installed = Path(metadata.distribution("ellmos-swarm-ai").locate_file("tools/__init__.py")).resolve(); print(imported); assert imported == installed'
+
+      - name: Check all installed CLI help without provider calls
+        shell: bash
+        working-directory: ${{ runner.temp }}
+        run: |
+          swarm-consensus --help > /dev/null
+          swarm-benchmark --help > /dev/null
+          swarm-translate --help > /dev/null
+          swarm-summarize --help > /dev/null
+          swarm-stigmergy-init --help > /dev/null
 
   anthropic-compat:
     name: >-
@@ -76,10 +143,11 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Install SDK compatibility dependencies
-        run: |
-          python -m pip install --upgrade pip
-          python -m pip install pytest "${{ matrix.anthropic.spec }}"
+      - name: Upgrade pip
+        run: python -m pip install --upgrade pip
+
+      - name: Install Anthropic compatibility test dependencies
+        run: python -m pip install pytest "${{ matrix.anthropic.spec }}"
 
       - name: Run Anthropic SDK compatibility tests
         env:
@@ -101,7 +169,7 @@ jobs:
         uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: "3.13"
-      - name: Scan core for high-severity findings
-        run: |
-          python -m pip install bandit
-          python -m bandit -q -r tools -lll
+      - name: Install Bandit
+        run: python -m pip install bandit
+      - name: Run Bandit scan
+        run: python -m bandit -q -r tools -lll

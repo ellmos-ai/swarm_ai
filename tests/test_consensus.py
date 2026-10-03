@@ -26,7 +26,7 @@ class TestBuildPrompts:
     def test_answer_mode(self):
         system, user = build_prompts("What is Python?", mode="answer")
         assert "Wissens-Agent" in system
-        assert "praezise" in system
+        assert "präzise" in system
         assert user == "What is Python?"
 
     def test_boolean_mode(self):
@@ -192,7 +192,7 @@ class TestRunConsensus:
         assert result["conservative_cost_bound_usd"] > result["estimated_cost_usd"]
         captured = capsys.readouterr()
         assert "DRY-RUN" in captured.out
-        assert "Geschaetzte Kosten" in captured.out
+        assert "Geschätzte Kosten" in captured.out
 
     @patch("tools.consensus_swarm.get_api_key", return_value="sk-test-key")
     @patch("tools.consensus_swarm.anthropic")
