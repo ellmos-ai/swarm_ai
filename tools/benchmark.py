@@ -2,17 +2,17 @@
 """
 llmauto Benchmark -- Vergleich sequentiell vs. parallel
 ========================================================
-Misst Geschwindigkeit und Erfolgsrate von LLM-Schwarm-Ausfuehrungen.
+Misst Geschwindigkeit und Erfolgsrate von LLM-Schwarm-Ausführungen.
 
 Usage:
     python benchmark.py                   Alle Benchmarks (dry-run)
-    python benchmark.py --run             Benchmarks ausfuehren
-    python benchmark.py --parallel        Nur parallele Ausfuehrung
-    python benchmark.py --sequential      Nur sequentielle Ausfuehrung
+    python benchmark.py --run             Benchmarks ausführen
+    python benchmark.py --parallel        Nur parallele Ausführung
+    python benchmark.py --sequential      Nur sequentielle Ausführung
     python benchmark.py --compare         Vergleich parallel vs. sequentiell
     python benchmark.py --dry-run         Nur Prompts anzeigen (Standard)
     python benchmark.py --workers N       Anzahl paralleler Worker (default: 3)
-    python benchmark.py --category CAT    Nur bestimmte Kategorie ausfuehren
+    python benchmark.py --category CAT    Nur bestimmte Kategorie ausführen
     python benchmark.py --export FILE     Ergebnisse als JSON exportieren
 """
 import argparse
@@ -53,7 +53,7 @@ TASK_CATALOG = {
                 "name": "code_review",
                 "prompt": (
                     "Analysiere die folgende Python-Funktion auf Fehler, Style-Probleme und "
-                    "Verbesserungsmoeglichkeiten. Gib eine strukturierte Bewertung:\n\n"
+                    "Verbesserungsmöglichkeiten. Gib eine strukturierte Bewertung:\n\n"
                     "```python\n"
                     "def process_data(items, filter=None, sort_key=None):\n"
                     "    result = []\n"
@@ -72,7 +72,7 @@ TASK_CATALOG = {
                 "name": "refactoring",
                 "prompt": (
                     "Refaktoriere diese Klasse nach SOLID-Prinzipien. "
-                    "Erklaere jede Aenderung:\n\n"
+                    "Erkläre jede Änderung:\n\n"
                     "```python\n"
                     "class UserManager:\n"
                     "    def __init__(self):\n"
@@ -96,7 +96,7 @@ TASK_CATALOG = {
             {
                 "name": "bug_fix",
                 "prompt": (
-                    "Finde und erklaere alle Bugs in diesem Code:\n\n"
+                    "Finde und erkläre alle Bugs in diesem Code:\n\n"
                     "```python\n"
                     "import threading\n\n"
                     "counter = 0\n"
@@ -121,7 +121,7 @@ TASK_CATALOG = {
             {
                 "name": "feature_design",
                 "prompt": (
-                    "Entwirf ein Plugin-System fuer eine CLI-Anwendung in Python. "
+                    "Entwirf ein Plugin-System für eine CLI-Anwendung in Python. "
                     "Anforderungen: (1) Plugins als separate .py Dateien, "
                     "(2) Automatische Erkennung im plugins/ Ordner, "
                     "(3) Definiertes Interface (name, version, execute), "
@@ -132,7 +132,7 @@ TASK_CATALOG = {
             {
                 "name": "test_generation",
                 "prompt": (
-                    "Schreibe umfassende Unit-Tests (pytest) fuer diese Funktion:\n\n"
+                    "Schreibe umfassende Unit-Tests (pytest) für diese Funktion:\n\n"
                     "```python\n"
                     "def parse_duration(s: str) -> int:\n"
                     "    \"\"\"Parst Dauer-Strings wie '2h30m', '45s', '1d12h' in Sekunden.\"\"\"\n"
@@ -143,10 +143,10 @@ TASK_CATALOG = {
                     "        value, unit = int(match.group(1)), match.group(2)\n"
                     "        total += value * units[unit]\n"
                     "    if total == 0:\n"
-                    "        raise ValueError(f'Ungueltiges Format: {s}')\n"
+                    "        raise ValueError(f'Ungültiges Format: {s}')\n"
                     "    return total\n"
                     "```\n"
-                    "Teste Normalfaelle, Edge-Cases und Fehlerfaelle."
+                    "Teste Normalfälle, Edge-Cases und Fehlerfälle."
                 ),
             },
         ],
@@ -166,19 +166,19 @@ TASK_CATALOG = {
                 "name": "konzeptanalyse",
                 "prompt": (
                     "Analysiere das CAP-Theorem in verteilten Systemen. "
-                    "Erklaere: (1) Die drei Eigenschaften, "
-                    "(2) Warum nur 2 von 3 gleichzeitig moeglich sind, "
-                    "(3) Praktische Beispiele fuer CP, AP und CA Systeme, "
+                    "Erkläre: (1) Die drei Eigenschaften, "
+                    "(2) Warum nur 2 von 3 gleichzeitig möglich sind, "
+                    "(3) Praktische Beispiele für CP, AP und CA Systeme, "
                     "(4) Wie moderne Systeme den Trade-off handhaben."
                 ),
             },
             {
                 "name": "vergleich",
                 "prompt": (
-                    "Vergleiche SQLite, PostgreSQL und MongoDB fuer den Einsatz "
-                    "in einer Desktop-Anwendung mit 10.000-100.000 Datensaetzen. "
-                    "Bewerte: Setup-Komplexitaet, Performance, Skalierbarkeit, "
-                    "Backup, Portabilitaet."
+                    "Vergleiche SQLite, PostgreSQL und MongoDB für den Einsatz "
+                    "in einer Desktop-Anwendung mit 10.000-100.000 Datensätzen. "
+                    "Bewerte: Setup-Komplexität, Performance, Skalierbarkeit, "
+                    "Backup, Portabilität."
                 ),
             },
             {
@@ -186,15 +186,15 @@ TASK_CATALOG = {
                 "prompt": (
                     "Analysiere die Entwicklung von Python Type Hints seit PEP 484. "
                     "Welche PEPs sind relevant? Wie hat sich das Tooling entwickelt "
-                    "(mypy, pyright, beartype)? Was sind Best Practices fuer 2025+?"
+                    "(mypy, pyright, beartype)? Was sind Best Practices für 2025+?"
                 ),
             },
             {
                 "name": "bewertung",
                 "prompt": (
                     "Bewerte die Vor- und Nachteile von Monorepo vs. Multi-Repo "
-                    "Ansaetzen fuer ein Team von 5-10 Entwicklern mit 3-5 Services. "
-                    "Beruecksichtige: CI/CD, Dependency Management, Code Sharing, "
+                    "Ansätzen für ein Team von 5-10 Entwicklern mit 3-5 Services. "
+                    "Berücksichtige: CI/CD, Dependency Management, Code Sharing, "
                     "Onboarding, Tooling."
                 ),
             },
@@ -206,8 +206,8 @@ TASK_CATALOG = {
             {
                 "name": "artikel_schreiben",
                 "prompt": (
-                    "Schreibe einen technischen Wiki-Artikel ueber 'asyncio in Python'. "
-                    "Struktur: Einfuehrung, Event Loop, Coroutines, Tasks, "
+                    "Schreibe einen technischen Wiki-Artikel über 'asyncio in Python'. "
+                    "Struktur: Einführung, Event Loop, Coroutines, Tasks, "
                     "Synchronisierung, Fehlerbehandlung, Best Practices. "
                     "Mit Code-Beispielen."
                 ),
@@ -215,17 +215,17 @@ TASK_CATALOG = {
             {
                 "name": "artikel_update",
                 "prompt": (
-                    "Aktualisiere diesen veralteten Abschnitt ueber Python Packaging:\n\n"
-                    "'Verwende setup.py mit distutils fuer die Paketierung. "
-                    "Erstelle eine MANIFEST.in und fuehre python setup.py sdist aus.'\n\n"
+                    "Aktualisiere diesen veralteten Abschnitt über Python Packaging:\n\n"
+                    "'Verwende setup.py mit distutils für die Paketierung. "
+                    "Erstelle eine MANIFEST.in und führe python setup.py sdist aus.'\n\n"
                     "Bringe ihn auf den Stand 2025 (pyproject.toml, build, twine)."
                 ),
             },
             {
                 "name": "suche_kompilation",
                 "prompt": (
-                    "Recherchiere und kompiliere eine Uebersicht der wichtigsten "
-                    "Design Patterns in Python. Fuer jedes Pattern: "
+                    "Recherchiere und kompiliere eine Übersicht der wichtigsten "
+                    "Design Patterns in Python. Für jedes Pattern: "
                     "Name, Kategorie (Creational/Structural/Behavioral), "
                     "Kurzbeschreibung, Python-spezifische Implementierung."
                 ),
@@ -234,7 +234,7 @@ TASK_CATALOG = {
                 "name": "kategorisierung",
                 "prompt": (
                     "Kategorisiere die folgenden Python-Bibliotheken nach Einsatzgebiet "
-                    "und empfehle je Kategorie die beste Option fuer 2025:\n"
+                    "und empfehle je Kategorie die beste Option für 2025:\n"
                     "requests, httpx, aiohttp, flask, fastapi, django, "
                     "sqlalchemy, peewee, tortoise-orm, pydantic, attrs, dataclasses, "
                     "click, typer, argparse, rich, textual, pytest, unittest, hypothesis"
@@ -243,7 +243,7 @@ TASK_CATALOG = {
             {
                 "name": "qualitaet_review",
                 "prompt": (
-                    "Pruefe diesen Wiki-Artikel auf Qualitaet und Vollstaendigkeit:\n\n"
+                    "Prüfe diesen Wiki-Artikel auf Qualität und Vollständigkeit:\n\n"
                     "# Git Branching\n\n"
                     "Git hat Branches. Man erstellt sie mit git branch name.\n"
                     "Dann wechselt man mit git checkout name.\n"
@@ -260,7 +260,7 @@ TASK_CATALOG = {
             {
                 "name": "security",
                 "prompt": (
-                    "Fuehre ein Security-Review dieses Flask-Endpoints durch:\n\n"
+                    "Führe ein Security-Review dieses Flask-Endpoints durch:\n\n"
                     "```python\n"
                     "@app.route('/search')\n"
                     "def search():\n"
@@ -268,11 +268,11 @@ TASK_CATALOG = {
                     "    sql = f\"SELECT * FROM products WHERE name LIKE '%{query}%'\"\n"
                     "    results = db.execute(sql).fetchall()\n"
                     "    return render_template_string(\n"
-                    "        '<h1>Ergebnisse fuer: ' + query + '</h1>'\n"
+                    "        '<h1>Ergebnisse für: ' + query + '</h1>'\n"
                     "        + ''.join(f'<p>{r[1]}</p>' for r in results)\n"
                     "    )\n"
                     "```\n"
-                    "Identifiziere alle Sicherheitsluecken und zeige Fixes."
+                    "Identifiziere alle Sicherheitslücken und zeige Fixes."
                 ),
             },
             {
@@ -305,7 +305,7 @@ TASK_CATALOG = {
             {
                 "name": "style",
                 "prompt": (
-                    "Pruefe diesen Code gegen PEP 8, PEP 257 und Python Best Practices:\n\n"
+                    "Prüfe diesen Code gegen PEP 8, PEP 257 und Python Best Practices:\n\n"
                     "```python\n"
                     "class myClass:\n"
                     "  def __init__(self,x,y,z):\n"
@@ -526,7 +526,7 @@ def _format_table(headers, rows, col_widths=None):
 
 
 def run_benchmark(tasks, runner, mode="sequential", max_workers=3, pricing=None):
-    """Fuehrt Benchmark-Tasks aus.
+    """Führt Benchmark-Tasks aus.
 
     Args:
         tasks: Liste von Task-Dicts {name, prompt, category, ...}
@@ -675,12 +675,12 @@ def print_comparison(seq_results, seq_duration, par_results, par_duration, max_w
 def main():
     parser = argparse.ArgumentParser(
         prog="benchmark",
-        description="llmauto Benchmark -- Vergleich sequentiell vs. parallel",
+        description="llmauto Benchmark – Vergleich sequentiell vs. parallel",
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
-    parser.add_argument("--run", action="store_true", help="Benchmarks tatsaechlich ausfuehren")
-    parser.add_argument("--parallel", action="store_true", help="Nur parallele Ausfuehrung")
-    parser.add_argument("--sequential", action="store_true", help="Nur sequentielle Ausfuehrung")
+    parser.add_argument("--run", action="store_true", help="Benchmarks tatsächlich ausführen")
+    parser.add_argument("--parallel", action="store_true", help="Nur parallele Ausführung")
+    parser.add_argument("--sequential", action="store_true", help="Nur sequentielle Ausführung")
     parser.add_argument("--compare", action="store_true", help="Beide Modi vergleichen")
     parser.add_argument("--dry-run", action="store_true", default=True,
                         help="Nur Tasks anzeigen (Standard)")
@@ -688,7 +688,7 @@ def main():
     parser.add_argument("--category", "-c", choices=list(TASK_CATALOG.keys()),
                         help="Nur eine Kategorie benchmarken")
     parser.add_argument("--model", "-m", default=DEFAULT_MODEL,
-                        help="Modell (default: haiku fuer guenstige Benchmarks)")
+                        help="Modell (Standard: haiku für günstige Benchmarks)")
     parser.add_argument("--input-cost", type=float,
                         help="USD pro 1M Input-Tokens (für unbekannte Modelle erforderlich)")
     parser.add_argument("--output-cost", type=float,
@@ -696,9 +696,9 @@ def main():
     parser.add_argument("--timeout", type=int, default=300,
                         help="Timeout pro Task in Sekunden (default: 300)")
     parser.add_argument("--limit", type=int,
-                        help="Maximale Task-Anzahl; fuer Live-Laeufe erforderlich")
+                        help="Maximale Task-Anzahl; für Live-Läufe erforderlich")
     parser.add_argument("--max-budget-usd", type=float,
-                        help="Gesamtbudget; fuer Live-Laeufe erforderlich")
+                        help="Gesamtbudget; für Live-Läufe erforderlich")
     parser.add_argument("--export", help="Ergebnisse als JSON exportieren")
 
     args = parser.parse_args()
@@ -738,8 +738,8 @@ def main():
     tasks = _get_all_tasks(categories)
 
     if not tasks:
-        print(f"Keine Tasks gefunden fuer Kategorie '{args.category}'.")
-        print(f"Verfuegbar: {', '.join(TASK_CATALOG.keys())}")
+        print(f"Keine Tasks gefunden für Kategorie '{args.category}'.")
+        print(f"Verfügbar: {', '.join(TASK_CATALOG.keys())}")
         return 1
 
     if not args.dry_run:
@@ -768,7 +768,7 @@ def main():
             f"${pricing['output']:.2f} Output je 1M Tokens"
         )
         print(
-            "Ausfuehren mit: python benchmark.py --run --limit N "
+            "Ausführen mit: python benchmark.py --run --limit N "
             "--max-budget-usd USD [--parallel|--sequential|--compare]"
         )
         if args.export:

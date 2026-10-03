@@ -14,7 +14,7 @@ Verwendung:
 
   Ohne Argumente: BACH system/ als Root, data/swarm/map/ als Bot-Daten.
   Mit DUNGEON_ROOT: Beliebiger Ordner als Dungeon-Root.
-  Mit MAP_DIR: Beliebiger Ordner fuer Bot-JSON-Dateien.
+  Mit MAP_DIR: Beliebiger Ordner für Bot-JSON-Dateien.
 
 Features v2:
   - Stockwerk-Navigation (Floor Tabs): Filtern nach Tiefe
@@ -22,7 +22,7 @@ Features v2:
   - Konfigurierbarer Dungeon-Root via CLI-Argument
   - Frame-basiertes Layout mit PanedWindow
 
-Nur tkinter (Python-Standardbibliothek), keine externen Abhaengigkeiten.
+Nur tkinter (Python-Standardbibliothek), keine externen Abhängigkeiten.
 """
 
 import os
@@ -34,7 +34,7 @@ from datetime import datetime
 
 
 # ---------------------------------------------------------------------------
-# Pfade ermitteln (Defaults, werden ggf. durch CLI-Argumente ueberschrieben)
+# Pfade ermitteln (Defaults, werden ggf. durch CLI-Argumente überschrieben)
 # ---------------------------------------------------------------------------
 SCRIPT_DIR = Path(__file__).resolve().parent          # system/data/swarm/
 SYSTEM_DIR = SCRIPT_DIR.parent.parent.parent          # system/
@@ -97,7 +97,7 @@ FLOOR_BTN_ACTIVE = TEXT_TITLE   # "#d4c090"
 FLOOR_BTN_FG     = "#c8c8dc"
 FLOOR_BTN_FG_ACT = "#0a0a0f"
 
-# Tiefenabhaengige Farben: tiefer = hoeher im Gebaeude (nach oben!)
+# Tiefenabhängige Farben: tiefer = höher im Gebäude (nach oben!)
 DEPTH_BG = [
     "#16162a",  # Tiefe 0 - Erdgeschoss (Dungeon-Root)
     "#121228",  # Tiefe 1 - 1. OG
@@ -111,7 +111,7 @@ DEPTH_BORDER = [
     "#222238",  # Tiefe 3
 ]
 
-# Gedimmte Farben fuer nicht-aktive Stockwerke
+# Gedimmte Farben für nicht-aktive Stockwerke
 DEPTH_BG_DIM = [
     "#0c0c18",  # Tiefe 0 dimmed
     "#0a0a14",  # Tiefe 1 dimmed
@@ -135,7 +135,7 @@ IGNORE_DIRS = {
     ".claude", ".venv", "venv", ".idea", ".vscode",
 }
 
-MAX_DEPTH = 3  # Erhoet auf 3 fuer 3.OG Support
+MAX_DEPTH = 3  # Erhöht auf 3 für 3.OG Support
 
 
 # ---------------------------------------------------------------------------
@@ -153,12 +153,12 @@ class RoomInfo:
         self.file_count = file_count
         self.children = []
         self.parent_path = parent_path
-        self.total_files = file_count  # wird spaeter berechnet
+        self.total_files = file_count  # wird später berechnet
         self.x = self.y = self.w = self.h = 0
 
 
 def scan_system_directory(system_dir):
-    """Scannt das BACH-System und gibt ein Dict {rel_path: RoomInfo} zurueck."""
+    """Scannt das BACH-System und gibt ein Dict {rel_path: RoomInfo} zurück."""
     rooms = {}
     system_path = Path(system_dir).resolve()
 
@@ -207,7 +207,7 @@ def scan_system_directory(system_dir):
 
 def _compute_total_files(rooms):
     """Berechnet total_files Bottom-Up (Blatt -> Wurzel)."""
-    # Sortiere nach Tiefe absteigend -> Blaetter zuerst
+    # Sortiere nach Tiefe absteigend -> Blätter zuerst
     by_depth = sorted(rooms.values(), key=lambda r: -r.depth)
     for room in by_depth:
         room.total_files = room.file_count
@@ -249,7 +249,7 @@ class BotInfo:
 
 
 def read_bot_files(map_dir):
-    """Liest alle bot_*.json Dateien und gibt Liste von BotInfo zurueck."""
+    """Liest alle bot_*.json Dateien und gibt Liste von BotInfo zurück."""
     bots = []
     map_path = Path(map_dir)
     if not map_path.exists():
@@ -321,7 +321,7 @@ def _layout_children(rooms, parent_path, px, py, pw, ph, visited):
     weights = [max(c.total_files, 1) for c in children]
     total_w = sum(weights)
 
-    # Achse waehlen: breitere Dimension teilen
+    # Achse wählen: breitere Dimension teilen
     horizontal = inner_w >= inner_h
     total_dim = inner_w if horizontal else inner_h
 
@@ -333,11 +333,11 @@ def _layout_children(rooms, parent_path, px, py, pw, ph, visited):
 
     dims = []
     if total_dim <= min_total:
-        # Zu wenig Platz: gleichmaessig aufteilen
+        # Zu wenig Platz: gleichmäßig aufteilen
         dims = [total_dim / n] * n
     else:
-        # Proportional verteilen, aber mit Mindestgroesse
-        avail = total_dim - min_total  # Platz ueber Minimum hinaus
+        # Proportional verteilen, aber mit Mindestgröße
+        avail = total_dim - min_total  # Platz über Minimum hinaus
         for w in weights:
             dims.append(min_px + avail * w / total_w)
 
@@ -374,14 +374,14 @@ def _layout_children(rooms, parent_path, px, py, pw, ph, visited):
 # Bot -> Raum Zuordnung
 # ---------------------------------------------------------------------------
 def find_room_for_bot(rooms, position):
-    """Findet den passenden Raum fuer eine Bot-Position."""
+    """Findet den passenden Raum für eine Bot-Position."""
     if not position:
         return rooms.get("")
 
     if position in rooms:
         return rooms[position]
 
-    # Laengster Prefix-Match
+    # Längster Prefix-Match
     best = ""
     for rp in rooms:
         if not rp:
@@ -471,7 +471,7 @@ def build_gui(rooms, map_dir, dungeon_root_path):
 
     tk.Label(
         title_frame,
-        text="Ich schwoere feierlich, dass ich ein Tunichtgut bin.",
+        text="Ich schwöre feierlich, dass ich ein Tunichtgut bin.",
         bg=BG_COLOR, fg=TEXT_DIM, font=f_sub,
     ).pack(side=tk.RIGHT, padx=5)
 
@@ -488,7 +488,7 @@ def build_gui(rooms, map_dir, dungeon_root_path):
         "active_floor": -1,      # -1 = Alle, 0=EG, 1=1.OG, 2=2.OG, 3=3.OG
         "floor_buttons": [],
         "chat_findings": [],     # Liste von (timestamp, bot_id, position, lines)
-        "chat_findings_hash": "",  # Zum Erkennen von Aenderungen
+        "chat_findings_hash": "",  # Zum Erkennen von Änderungen
     }
 
     # Floor-Button-Erstellung
@@ -574,7 +574,7 @@ def build_gui(rooms, map_dir, dungeon_root_path):
     chat_text.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
     chat_scrollbar.config(command=chat_text.yview)
 
-    # Text-Tags fuer Chat-Formatierung
+    # Text-Tags für Chat-Formatierung
     chat_text.tag_configure("timestamp", foreground=CHAT_TIME, font=f_chat)
     chat_text.tag_configure("botname", foreground=CHAT_BOT_NAME, font=f_chat_b)
     chat_text.tag_configure("finding", foreground=CHAT_TEXT, font=f_chat)
@@ -660,7 +660,7 @@ def build_gui(rooms, map_dir, dungeon_root_path):
         bots = state["bots"]
         active_floor = state["active_floor"]
 
-        # --- Durchsuchte Raeume & Schatz-Raeume ermitteln ---
+        # --- Durchsuchte Räume & Schatz-Räume ermitteln ---
         searched_set = set()
         treasure_set = set()
         for bot in bots:
@@ -671,7 +671,7 @@ def build_gui(rooms, map_dir, dungeon_root_path):
                 if rm:
                     treasure_set.add(rm.path)
 
-        # --- Raeume zeichnen (Eltern vor Kindern) ---
+        # --- Räume zeichnen (Eltern vor Kindern) ---
         for room in sorted(rooms.values(), key=lambda r: r.depth):
             is_dimmed = (active_floor != -1 and room.depth != active_floor)
             _draw_room(canvas, room, searched_set, treasure_set, is_dimmed)
@@ -754,12 +754,12 @@ def build_gui(rooms, map_dir, dungeon_root_path):
         if not dimmed and room.path in treasures:
             color = COLOR_TREASURE
 
-        # Kuerzen falls noetig
+        # Kürzen falls nötig
         max_chars = max(3, int(w / 7))
         if len(label) > max_chars:
             label = label[:max_chars - 1] + "."
 
-        # Dateianzahl anhaengen wenn Platz
+        # Dateianzahl anhängen wenn Platz
         suffix = ""
         if room.total_files > 0 and w > 60:
             suffix = f" ({room.total_files})"
@@ -799,7 +799,7 @@ def build_gui(rooms, map_dir, dungeon_root_path):
             return
 
         if status == "exploring":
-            # Aeusserer Puls-Ring
+            # Äußerer Puls-Ring
             cv.create_oval(bx - r - 4, by - r - 4, bx + r + 4, by + r + 4,
                            outline=COLOR_EXPLORING, width=1, dash=(2, 3))
             cv.create_oval(bx - r, by - r, bx + r, by + r,
@@ -848,7 +848,7 @@ def build_gui(rooms, map_dir, dungeon_root_path):
         new_findings = []
         for bot in bots:
             if bot.findings:
-                # Position kuerzen
+                # Position kürzen
                 pos = bot.position or "system root"
                 ts = bot.updated or ""
                 # Timestamp aus bot-Daten extrahieren oder aktuell
@@ -863,7 +863,7 @@ def build_gui(rooms, map_dir, dungeon_root_path):
 
                 new_findings.append((time_str, bot.agent_id, pos, bot.findings))
 
-        # Hash bilden um unnoetige Updates zu vermeiden
+        # Hash bilden um unnötige Updates zu vermeiden
         findings_hash = str([(t, b, p, f) for t, b, p, f in new_findings])
         if findings_hash == state["chat_findings_hash"]:
             return
@@ -886,7 +886,7 @@ def build_gui(rooms, map_dir, dungeon_root_path):
 
                 # Findings-Zeilen
                 for finding in findings:
-                    # Farbwahl: gruene Saetze fuer "sauber"/"keine", goldene fuer Funde
+                    # Farbwahl: grüne Sätze für "sauber"/"keine", goldene für Funde
                     tag = "finding"
                     fl = finding.lower()
                     if ("sauber" in fl or "keine" in fl or "clean" in fl
@@ -924,7 +924,7 @@ def build_gui(rooms, map_dir, dungeon_root_path):
             rm = find_room_for_bot(rooms, bot.position)
             if not rm:
                 continue
-            # Grobe Pruefung: ist Maus im Raum?
+            # Grobe Prüfung: ist Maus im Raum?
             if not (rm.x <= mx <= rm.x + rm.w and rm.y <= my <= rm.y + rm.h):
                 continue
 
@@ -985,7 +985,7 @@ def build_gui(rooms, map_dir, dungeon_root_path):
         update_chat(state["bots"])
         win.after(REFRESH_MS, tick)
 
-    # Resize: nur neu zeichnen wenn Groesse sich aendert
+    # Resize: nur neu zeichnen wenn Größe sich ändert
     def on_configure(event):
         if event.widget is canvas:
             new_size = (event.width, event.height)
@@ -1011,11 +1011,11 @@ def main():
 
     print("Scanne Verzeichnisstruktur...")
     rooms = scan_system_directory(SYSTEM_DIR)
-    print(f"  {len(rooms)} Raeume gefunden")
+    print(f"  {len(rooms)} Räume gefunden")
 
     if not rooms:
         print("WARNUNG: Keine Verzeichnisse gefunden!")
-        print(f"  Gepruefter Pfad: {SYSTEM_DIR}")
+        print(f"  Geprüfter Pfad: {SYSTEM_DIR}")
         print("  Erstelle Platzhalter...")
         rooms = {"": RoomInfo("", "system", 0, 0, "")}
 
@@ -1028,7 +1028,7 @@ def main():
         label = "Erdgeschoss" if d == 0 else f"{d}. OG"
         shown = ", ".join(sorted(names)[:12])
         more = f"... (+{len(names) - 12})" if len(names) > 12 else ""
-        print(f"  {label}: {len(names)} Raeume  [{shown}{more}]")
+        print(f"  {label}: {len(names)} Räume  [{shown}{more}]")
     print()
 
     bots = read_bot_files(MAP_DIR)
@@ -1040,10 +1040,10 @@ def main():
 
     if not MAP_DIR.exists():
         print(f"HINWEIS: {MAP_DIR} existiert nicht.")
-        print("  Die GUI startet trotzdem und prueft alle 2s auf neue Daten.")
+        print("  Die GUI startet trotzdem und prüft alle 2s auf neue Daten.")
         print()
 
-    print("Starte GUI... (Schliesse das Fenster um zu beenden)")
+    print("Starte GUI... (Schließe das Fenster, um zu beenden)")
     build_gui(rooms, MAP_DIR, SYSTEM_DIR)
 
 

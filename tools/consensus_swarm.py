@@ -194,27 +194,27 @@ def build_prompts(question: str, mode: str = "answer",
             f"Kategorisiere die Eingabe in GENAU EINE der folgenden Kategorien: {cat_str}\n\n"
             "REGELN:\n"
             "- Antworte NUR mit dem Kategorienamen\n"
-            "- Keine Erklaerung, kein Satz, nur das eine Wort\n"
-            "- Wenn keine Kategorie passt, waehle die naechstliegende"
+            "- Keine Erklärung, kein Satz, nur das eine Wort\n"
+            "- Wenn keine Kategorie passt, wähle die nächstliegende"
         )
         user_prompt = question
 
     elif mode == "boolean":
         system_prompt = (
-            "Du bist ein Fakten-Pruefungs-Agent. "
+            "Du bist ein Fakten-Prüfungs-Agent. "
             "Beantworte die Frage mit JA oder NEIN.\n\n"
             "REGELN:\n"
             "- Antworte NUR mit 'JA' oder 'NEIN'\n"
-            "- Keine Erklaerung, nur ein Wort"
+            "- Keine Erklärung, nur ein Wort"
         )
         user_prompt = question
 
     else:  # mode == "answer"
         system_prompt = (
             "Du bist ein Wissens-Agent in einem Schwarm-System. "
-            "Beantworte die Frage praezise und kurz (1-2 Saetze).\n\n"
+            "Beantworte die Frage präzise und kurz (1-2 Sätze).\n\n"
             "REGELN:\n"
-            "- Kurz und praezise antworten\n"
+            "- Kurz und präzise antworten\n"
             "- Faktenbasiert\n"
             "- Keine Einleitungen wie 'Die Antwort ist...'"
         )
@@ -262,7 +262,7 @@ def compute_consensus(results: List[Dict], mode: str = "answer",
         # Exakter Vergleich (case-insensitive)
         normalized = [a.strip().upper() for a in valid_answers]
     else:
-        # Fuer freie Antworten: lowercase, Satzzeichen entfernen
+        # Für freie Antworten: lowercase, Satzzeichen entfernen
         normalized = [a.strip().lower().rstrip('.!?') for a in valid_answers]
 
     vote_counts = Counter(normalized)
@@ -278,7 +278,7 @@ def compute_consensus(results: List[Dict], mode: str = "answer",
     agreement_ratio = winner_count / len(valid_answers)
     response_rate = len(valid_answers) / len(results) if results else 0.0
 
-    # Originale Antwort fuer den Gewinner finden
+    # Originale Antwort für den Gewinner finden
     consensus_answer = None
     if winner is not None:
         for answer, norm in zip(valid_answers, normalized, strict=True):
@@ -310,7 +310,7 @@ def run_consensus(question: str, num_agents: int = DEFAULT_AGENTS,
                    cost_per_1m: Optional[Dict] = None,
                    max_budget_usd: Optional[float] = None) -> Dict:
     """
-    Fuehrt Konsensus-Schwarm aus.
+    Führt Konsensus-Schwarm aus.
 
     Returns:
         Dict mit consensus, individual_results, stats
@@ -352,7 +352,7 @@ def run_consensus(question: str, num_agents: int = DEFAULT_AGENTS,
         est_input = num_agents * (len(system_prompt) + len(question)) // 4
         est_output = num_agents * 50
         est_cost = (est_input * costs["input"] + est_output * costs["output"]) / 1_000_000
-        emit(f"[DRY-RUN] Geschaetzte Kosten: ${est_cost:.6f}")
+        emit(f"[DRY-RUN] Geschätzte Kosten: ${est_cost:.6f}")
         emit(f"           Input-Tokens:  ~{est_input}")
         emit(f"           Output-Tokens: ~{est_output}")
         emit(f"           API-Calls: {num_agents}")
@@ -409,7 +409,7 @@ def run_consensus(question: str, num_agents: int = DEFAULT_AGENTS,
     emit(f"{'=' * 60}")
     emit(f"  Antwort:         {consensus['consensus_answer']}")
     emit(f"  Confidence:      {consensus['confidence']:.0%}")
-    emit(f"  Uebereinstimmung: {consensus['valid_responses']}/{consensus['total_agents']} Agenten")
+    emit(f"  Gültige Antworten: {consensus['valid_responses']}/{consensus['total_agents']} Agenten")
     emit(f"  Stimmen:         {consensus['votes']}")
     emit(f"{'=' * 60}")
     emit(f"  Dauer:           {elapsed:.1f}s")
@@ -513,7 +513,7 @@ def main():
     if args.json_output and args.dry_run:
         print(json.dumps(result, ensure_ascii=False, indent=2))
     elif args.json_output:
-        # JSON-Ausgabe (ohne individuelle Details fuer Kompaktheit)
+        # JSON-Ausgabe (ohne individuelle Details zur Kompaktheit)
         output = {
             "question": question,
             "mode": args.mode,

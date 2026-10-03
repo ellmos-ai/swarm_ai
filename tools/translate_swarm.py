@@ -2,15 +2,15 @@
 # -*- coding: utf-8 -*-
 # SPDX-License-Identifier: MIT
 """
-translate_swarm.py - Schwarm-Uebersetzung mit Parallel-Chunks
+translate_swarm.py - Schwarm-Übersetzung mit Parallel-Chunks
 ======================================================================
 
-Uebersetzt fehlende Texte in languages_translations via Claude Haiku.
-"Parallel-Chunks": Texte in kleine Chunks buendeln, 5-10 parallele Haiku-Instanzen.
-Unterstützt 6 Zielsprachen (Referenz: .SOFTWARE/_LANG/LANGUAGE_CODES.md).
+Übersetzt fehlende Texte in languages_translations via Claude Haiku.
+"Parallel-Chunks": Texte in kleine Chunks bündeln, 5-10 parallele Haiku-Instanzen.
+Unterstützt sechs Zielsprachen für Übersetzungen.
 
 Usage:
-    python translate_swarm.py                       # Alle fehlenden DE->EN uebersetzen
+    python translate_swarm.py                       # Alle fehlenden DE->EN übersetzen
     python translate_swarm.py --target en            # Explizit: Zielsprache Englisch
     python translate_swarm.py --target es            # Zielsprache Spanisch
     python translate_swarm.py --target zh            # Zielsprache Chinesisch
@@ -18,10 +18,10 @@ Usage:
     python translate_swarm.py --target ru            # Zielsprache Russisch
     python translate_swarm.py --dry-run              # Nur anzeigen, kein API-Call
     python translate_swarm.py --namespace help        # Nur einen Namespace
-    python translate_swarm.py --chunk-size 5          # Chunk-Groesse anpassen
+    python translate_swarm.py --chunk-size 5          # Chunk-Größe anpassen
     python translate_swarm.py --workers 5             # Thread-Anzahl anpassen
-    python translate_swarm.py --limit 20              # Max. Texte uebersetzen
-    python translate_swarm.py --inventory             # Status-Uebersicht
+    python translate_swarm.py --limit 20              # Max. Texte übersetzen
+    python translate_swarm.py --inventory             # Status-Übersicht
 
 Author: Lukas Geiger (ellmos-ai)
 Created: 2026-02-22
@@ -387,7 +387,7 @@ def get_missing_translations(db_path, namespace=None, limit=0,
 
 
 def chunk_texts(texts, chunk_size):
-    """Teilt Texte in Chunks der Groesse chunk_size."""
+    """Teilt Texte in Chunks der Größe chunk_size."""
     if chunk_size <= 0:
         raise ValueError("chunk_size must be greater than zero")
     return [texts[i:i + chunk_size] for i in range(0, len(texts), chunk_size)]
@@ -399,7 +399,7 @@ def chunk_texts(texts, chunk_size):
 def translate_chunk(client, chunk, chunk_index, total_chunks, target_lang='en',
                     source_lang='de'):
     """
-    Uebersetzt einen Chunk von Texten via Haiku API.
+    Übersetzt einen Chunk von Texten via Haiku API.
 
     Returns:
         (chunk_index, results_list, error_or_none)
@@ -514,7 +514,7 @@ def translate_chunk(client, chunk, chunk_index, total_chunks, target_lang='en',
 
 def write_results_to_db(db_path, all_results, target_lang='en'):
     """
-    Schreibt Uebersetzungs-Ergebnisse gesammelt in die DB.
+    Schreibt Übersetzungs-Ergebnisse gesammelt in die DB.
     Single-threaded, wird NACH allen API-Calls aufgerufen.
     """
     now = datetime.now(timezone.utc).isoformat()
@@ -617,7 +617,7 @@ def _run_swarm(source_lang="de", target_lang="en", namespace=None,
     print(f"[SWARM] {len(chunks)} Chunks a {chunk_size} Texte, {workers} parallele Worker")
 
     if dry_run:
-        print("\n[DRY-RUN] Wuerde folgende Chunks senden:")
+        print("\n[DRY-RUN] Würde folgende Chunks senden:")
         for i, chunk in enumerate(chunks):
             keys = [t["key"][:30] for t in chunk[:3]]
             print(f"  Chunk {i + 1}/{len(chunks)}: {len(chunk)} Texte - {', '.join(keys)}...")
@@ -626,7 +626,7 @@ def _run_swarm(source_lang="de", target_lang="en", namespace=None,
         est_input_tokens = total_chars // 4 + len(chunks) * 200
         est_output_tokens = total_chars // 4
         cost = (est_input_tokens * 1 + est_output_tokens * 5) / 1_000_000
-        print(f"\n[DRY-RUN] Geschaetzte Kosten: ${cost:.4f}")
+        print(f"\n[DRY-RUN] Geschätzte Kosten: ${cost:.4f}")
         print(f"           Input-Tokens:  ~{est_input_tokens}")
         print(f"           Output-Tokens: ~{est_output_tokens}")
         print(f"           Gesamt-Zeichen: {total_chars}")
@@ -638,7 +638,7 @@ def _run_swarm(source_lang="de", target_lang="en", namespace=None,
     api_key = get_api_key()
     client = anthropic.Anthropic(api_key=api_key)
 
-    # 4. Parallel uebersetzen
+    # 4. Parallel übersetzen
     all_results = []
     all_errors = []
     db_success = 0
@@ -647,7 +647,7 @@ def _run_swarm(source_lang="de", target_lang="en", namespace=None,
     lock = threading.Lock()
     start_time = time.time()
 
-    print(f"\n[SWARM] Starte Uebersetzung mit {workers} Workern...")
+    print(f"\n[SWARM] Starte Übersetzung mit {workers} Workern...")
 
     with ThreadPoolExecutor(max_workers=workers) as executor:
         futures = {
