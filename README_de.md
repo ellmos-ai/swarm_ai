@@ -68,3 +68,9 @@ Die Paketmetadaten in `pyproject.toml` weisen Version `0.1.3` aus; daraus folgt 
 Melde Schwachstellen über [GitHub Security Advisories](https://github.com/ellmos-ai/swarm_ai/security/advisories/new) oder eine der in [`SECURITY.md`](SECURITY.md) genannten Adressen. Das Projekt veröffentlicht keine Reaktionsfrist. Den aktuellen CI-Status zeigt der Live-[GitHub-Actions-Workflow](https://github.com/ellmos-ai/swarm_ai/actions/workflows/ci.yml).
 
 Die englische Übersicht steht in [`README.md`](README.md), datierte Projekthistorie im [`CHANGELOG.md`](CHANGELOG.md).
+
+## Verwandte Projekte
+
+- [COMA](https://github.com/ellmos-ai/coma): eine optionale Provider-Brücke; mit installierter `providers`-Zusatzabhängigkeit nutzt Swarm die Spawner- und Adapter-API von COMA.
+- [Roshambo](https://github.com/ellmos-ai/roshambo): ein eigenständiges Werkzeug zur Koordination unabhängig gestarteter Agenten mit serialisierbaren Leases und Ergebnisspeicher.
+- [MarbleRun](https://github.com/ellmos-ai/marblerun): ein eigenständiges Toolkit zum Konfigurieren von Multi-Agent-Ketten.

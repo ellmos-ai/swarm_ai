@@ -39,3 +39,9 @@ These are libraries and examples, not a hosted agent service or production relia
 ## Verification
 
 CI configuration covers Ubuntu, Windows, and macOS with Python 3.10–3.13. Consult the current repository workflow for live results; this file does not publish a static test count or audit status. The repository's `LICENSE` is MIT. Third-party components have separate terms and notices.
+
+## Related projects
+
+- [COMA](https://github.com/ellmos-ai/coma): optional Spawner/adapter provider bridge used by Swarm when the `providers` extra is installed.
+- [Roshambo](https://github.com/ellmos-ai/roshambo): separate toolkit for coordinating independently launched agents through serializable leases and outcome memory.
+- [MarbleRun](https://github.com/ellmos-ai/marblerun): separate toolkit for configuring multi-agent chains.
