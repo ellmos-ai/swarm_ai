@@ -1,5 +1,9 @@
 # Changelog
 
+## After-care clarification — 2026-10-03
+
+This dated clarification supersedes earlier documentation claims without rewriting their historical entries. The previous README matrices, badges, and audit text were not evidence of competitor behavior, zero network egress, calibrated consensus confidence, race-proof or unforgeable team locks, an operating-system sandbox, universal cost caps, transitive license clearance, or a vulnerability-response SLA. Do not treat those claims in the historical entries below as current guarantees. The recorded 2.54x benchmark belongs only to the specific run and success counts in `results/benchmark_20260306.json`; it is not a general performance claim. Version `0.1.3` is package metadata, not by itself evidence of a published package. One historical pilot error-path string was generalized for publication; the recorded experiment metrics are unchanged.
+
 ## [0.1.3] - 2026-09-16
 
 ### Added

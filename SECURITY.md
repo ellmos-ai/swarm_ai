@@ -7,45 +7,28 @@
 <a name="english"></a>
 ## English
 
-### Supported Versions
+### Supported versions
 
-| Version | Supported          | Notes |
-| ------- | ------------------ | ----- |
-| `0.1.x` | :white_check_mark: | Current active release branch (`master`) |
-| `< 0.1.0` | :x:              | Historical experiments and archived snapshots |
+This repository currently declares version `0.1.3` in `pyproject.toml`. That source version alone does not identify a published package or promise a response or support period. Report issues against the current repository state and include the commit or version you use.
 
-### Local-First & Zero-Egress Architecture
+### Data flow and execution
 
-`swarm-ai` is designed with a strict **local-first** and **least-privilege** security model:
-- **Local Execution**: All swarm coordination logic, stigmergy marker databases (`swarm.db`, `chunks.db`), and runner orchestrations execute locally in user space without requiring elevated permissions (no root/admin required).
-- **Zero-Egress Data Protection**: Local files, internal prompts, and private database states are never sent to third-party tracking services or external telemetry endpoints.
-- **Fail-Closed Budgeting**: All parallel swarm routines enforce explicit token ceilings, call limits, and retry boundaries to prevent uncontrolled resource exhaustion.
+Coordination data such as SQLite marker and chunk state is stored locally by the tools. Calls to Anthropic, Claude CLI, COMA-connected providers, or other configured services can send prompts and related request data outside the machine. Review the selected provider's data handling rules before sending sensitive content.
 
-### Vulnerability Response & SLA
+The program runs with the permissions and environment of its caller. The Windows `RunAsInvoker` compatibility mechanism does not create an operating-system sandbox and does not guarantee that a process is non-elevated. Team-lock files are a cooperative coordination protocol, not a security boundary.
 
-We take security disclosures seriously and commit to:
-- **Initial Response SLA**: Within **48 hours** of receiving a valid disclosure.
-- **Triage & Status Update**: Within **5 business days** with an assessment and remediation roadmap.
-- **Fix & Advisory Release**: Coordinated release of security patch alongside a public GitHub Security Advisory.
+Some commands require positive finite estimated-cost caps: consensus, translation, and summarization accept such caps, and `ClaudeRunner` supports an optional cap. These controls do not form one universal limit across every provider or workflow; estimates can differ from billed charges.
 
-### Reporting a Vulnerability
+### Reporting a vulnerability
 
-If you discover a potential security vulnerability in `swarm-ai`:
+Please avoid public issue details while a vulnerability is unresolved. Submit a private report through [GitHub Security Advisories](https://github.com/ellmos-ai/swarm_ai/security/advisories/new), or contact a maintainer at one of these addresses:
 
-1. **Do NOT** open a public issue or discussion.
-2. Submit a report privately via **GitHub Security Advisories**:
-   - Navigate to [Security Advisories](https://github.com/ellmos-ai/swarm_ai/security/advisories/new)
-3. Alternatively, contact the maintainers directly via email:
-   - `security@ellmos.ai`
-   - `security@open-bricks.org`
-   - `support@lukasgeiger.com`
-   - `lukas@open-bricks.org`
+- `security@ellmos.ai`
+- `security@open-bricks.org`
+- `support@lukasgeiger.com`
+- `lukas@open-bricks.org`
 
-Please include in your report:
-- A description of the vulnerability and affected components (e.g. runner, consensus, stigmergy API).
-- Steps to reproduce or a minimal proof of concept (PoC).
-- Potential impact and any proposed remediations.
-- **Never** include private API keys, real credentials, or production data in your report.
+Include the affected component, a concise description, reproduction steps, and potential impact. Do not include API keys, passwords, or private production data. The project does not publish a response-time or remediation SLA.
 
 ---
 
@@ -54,36 +37,23 @@ Please include in your report:
 
 ### Unterstützte Versionen
 
-| Version | Unterstützt        | Hinweise |
-| ------- | ------------------ | -------- |
-| `0.1.x` | :white_check_mark: | Aktueller Entwicklungs- und Release-Zweig (`master`) |
-| `< 0.1.0` | :x:              | Historische Experimente und Archiv-Snapshots |
+Dieses Repository weist in `pyproject.toml` die Version `0.1.3` aus. Diese Quellcode-Version allein sagt nichts über eine veröffentlichte Paketversion aus und begründet keine Support- oder Reaktionsfrist. Melden Sie Probleme zum aktuellen Repository-Stand und nennen Sie den verwendeten Commit oder die Version.
 
-### Local-First- & Zero-Egress-Architektur
+### Datenfluss und Ausführung
 
-`swarm-ai` folgt einem konsequenten **Local-First**- und **Least-Privilege**-Sicherheitskonzept:
-- **Lokale Ausführung**: Die gesamte Schwarmkoordination, Stigmergie-Datenbanken (`swarm.db`, `chunks.db`) und Runner-Orchestrierungen laufen lokal im User-Space ohne erweiterte Rechte.
-- **Datenschutz & Zero-Egress**: Lokale Dateien, Prompts und Datenbankzustände werden zu keinem Zeitpunkt an externe Tracking- oder Telemetrie-Dienste übertragen.
-- **Fail-Closed Budget-Schutz**: Alle parallelen Schwarm-Routinen erzwingen verbindliche Kosten- und Token-Obergrenzen sowie Limitierungen für API-Wiederholungen.
+Koordinationsdaten wie SQLite-Marker und Chunk-Zustand werden von den Werkzeugen lokal gespeichert. Aufrufe an Anthropic, Claude CLI, über COMA verbundene Provider oder andere konfigurierte Dienste können Prompts und zugehörige Anfragedaten an externe Systeme senden. Prüfen Sie vor der Übermittlung vertraulicher Inhalte die Datenschutzregeln des gewählten Providers.
 
-### Reaktionszeiten & SLA
+Das Programm läuft mit den Berechtigungen und der Umgebung des aufrufenden Kontos. Der Windows-Kompatibilitätsmechanismus `RunAsInvoker` erzeugt keine Betriebssystem-Sandbox und garantiert nicht, dass ein Prozess ohne erhöhte Rechte läuft. Team-Lock-Dateien bilden ein kooperatives Koordinationsverfahren und keine Sicherheitsgrenze.
 
-Wir nehmen Sicherheitsmeldungen sehr ernst und garantieren:
-- **Erste Rückmeldung (SLA)**: Innerhalb von **48 Stunden** nach Eingang einer validen Sicherheitsmeldung.
-- **Triage & Statusupdate**: Innerhalb von **5 Werktagen** mit Bewertung und Behebungsplan.
-- **Fix & Advisory-Release**: Koordinierte Veröffentlichung des Fixes zusammen mit einem GitHub Security Advisory.
+Einige Befehle verlangen positive, endliche Kostenschätzungsgrenzen: Konsens, Übersetzung und Zusammenfassung akzeptieren solche Grenzen; `ClaudeRunner` unterstützt eine optionale Grenze. Diese Kontrollen bilden keine universelle Obergrenze für alle Provider oder Abläufe. Schätzungen können von den abgerechneten Kosten abweichen.
 
 ### Schwachstelle melden
 
-Wenn Sie eine Sicherheitslücke in `swarm-ai` entdecken:
+Bitte veröffentlichen Sie Details zu einer ungelösten Schwachstelle nicht in einem öffentlichen Issue. Senden Sie einen vertraulichen Bericht über [GitHub Security Advisories](https://github.com/ellmos-ai/swarm_ai/security/advisories/new) oder kontaktieren Sie die Maintainer unter einer dieser Adressen:
 
-1. Eröffnen Sie bitte **kein** öffentliches GitHub-Issue.
-2. Melden Sie die Schwachstelle vertraulich über **GitHub Security Advisories**:
-   - [Sicherheitsbericht erstellen](https://github.com/ellmos-ai/swarm_ai/security/advisories/new)
-3. Alternativ per E-Mail an das Sicherheitsteam:
-   - `security@ellmos.ai`
-   - `security@open-bricks.org`
-   - `support@lukasgeiger.com`
-   - `lukas@open-bricks.org`
+- `security@ellmos.ai`
+- `security@open-bricks.org`
+- `support@lukasgeiger.com`
+- `lukas@open-bricks.org`
 
-Bitte geben Sie eine kurze Beschreibung, Schritte zur Reproduktion sowie betroffene Module an. Fügen Sie **niemals** API-Schlüssel oder private Zugangsdaten bei.
+Nennen Sie die betroffene Komponente, eine kurze Beschreibung, Reproduktionsschritte und mögliche Auswirkungen. Fügen Sie keine API-Schlüssel, Passwörter oder vertraulichen Produktionsdaten bei. Das Projekt veröffentlicht keine Reaktions- oder Behebungsfrist.
