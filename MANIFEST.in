@@ -1,4 +1,6 @@
 include README.md
 include README_de.md
 include README_es.md
+include README_ja.md
+include README_ru.md
 include llms.txt

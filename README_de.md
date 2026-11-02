@@ -1,6 +1,6 @@
 # swarm-ai
 
-[English](README.md) · [Deutsch](README_de.md) · [Español](README_es.md)
+[English](README.md) · [Deutsch](README_de.md) · [Español](README_es.md) · [日本語](README_ja.md) · [Русский](README_ru.md)
 
 ![swarm-ai-Banner](assets/banner.png)
 

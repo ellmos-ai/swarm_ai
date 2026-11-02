@@ -2,6 +2,8 @@
 
 ## Documentation translations — 2026-11-02
 
+- Added complete Japanese and Russian project guides, reciprocal five-language navigation, and source-distribution inclusion. Documentation languages do not imply additional localized UI languages.
+
 - Added the Spanish project overview and linked it from the English and German README selectors and the `llms.txt` index. This is a documentation translation; it does not add Spanish UI support.
 - Include the English, German, and Spanish guides plus the documentation index in source distributions. Runtime interfaces and package version remain unchanged.
 
