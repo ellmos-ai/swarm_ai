@@ -5,4 +5,8 @@ include README_ja.md
 include README_ru.md
 include README_zh.md
 include README_fr.md
+include README_hi.md
+include README_ar.md
+include README_bn.md
+include README_pt.md
 include llms.txt

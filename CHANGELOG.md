@@ -2,6 +2,8 @@
 
 ## Documentation translations — 2026-11-02
 
+- Completed the eleven-language documentation set with full Hindi, Arabic, Bengali, and Portuguese guides, reciprocal navigation, and source-distribution inclusion. These are documentation languages, not additional runtime UI locales.
+
 - Added complete Simplified Chinese and French project guides, reciprocal seven-language navigation, and source-distribution inclusion. Runtime interfaces remain unchanged.
 
 - Added complete Japanese and Russian project guides, reciprocal five-language navigation, and source-distribution inclusion. Documentation languages do not imply additional localized UI languages.
