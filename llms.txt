@@ -27,7 +27,7 @@ These are libraries and examples, not a hosted agent service or production relia
 
 ## Useful files
 
-- `README.md` and `README_de.md`: project overview and usage examples
+- `README.md`, `README_de.md`, and `README_es.md`: project overviews and usage examples in English, German, and Spanish
 - `SECURITY.md`: data flow, execution limits, and private vulnerability-reporting channels
 - `THIRD_PARTY_LICENSES.md`: selected declared dependencies; not a transitive dependency audit
 - `TODO.md`: current open tasks under `## Offene Aufgaben`
