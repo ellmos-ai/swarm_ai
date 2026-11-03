@@ -1,6 +1,6 @@
 # swarm-ai
 
-[English](README.md) · [Deutsch](README_de.md)
+[English](README.md) · [Deutsch](README_de.md) · [Español](README_es.md) · [日本語](README_ja.md) · [Русский](README_ru.md) · [简体中文](README_zh.md) · [Français](README_fr.md) · [हिन्दी](README_hi.md) · [العربية](README_ar.md) · [বাংলা](README_bn.md) · [Português](README_pt.md)
 
 ![swarm-ai banner](assets/banner.png)
 
@@ -67,7 +67,7 @@ Version `0.1.3` is declared in `pyproject.toml`; that metadata alone does not im
 
 Report vulnerabilities through [GitHub Security Advisories](https://github.com/ellmos-ai/swarm_ai/security/advisories/new) or an address listed in [`SECURITY.md`](SECURITY.md). The project does not publish a response-time SLA. Consult the live [GitHub Actions workflow](https://github.com/ellmos-ai/swarm_ai/actions/workflows/ci.yml) for current CI status.
 
-See [`README_de.md`](README_de.md) for the German overview and [`CHANGELOG.md`](CHANGELOG.md) for dated project history.
+See [`README_de.md`](README_de.md) for the German overview, [`README_es.md`](README_es.md) for the Spanish overview, and [`CHANGELOG.md`](CHANGELOG.md) for dated project history.
 
 ## Related projects
 

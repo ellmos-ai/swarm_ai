@@ -1,5 +1,16 @@
 # Changelog
 
+## Documentation translations — 2026-11-02
+
+- Completed the eleven-language documentation set with full Hindi, Arabic, Bengali, and Portuguese guides, reciprocal navigation, and source-distribution inclusion. These are documentation languages, not additional runtime UI locales.
+
+- Added complete Simplified Chinese and French project guides, reciprocal seven-language navigation, and source-distribution inclusion. Runtime interfaces remain unchanged.
+
+- Added complete Japanese and Russian project guides, reciprocal five-language navigation, and source-distribution inclusion. Documentation languages do not imply additional localized UI languages.
+
+- Added the Spanish project overview and linked it from the English and German README selectors and the `llms.txt` index. This is a documentation translation; it does not add Spanish UI support.
+- Include the English, German, and Spanish guides plus the documentation index in source distributions. Runtime interfaces and package version remain unchanged.
+
 ## After-care clarification — 2026-10-03
 
 This dated clarification supersedes earlier documentation claims without rewriting their historical entries. The previous README matrices, badges, and audit text were not evidence of competitor behavior, zero network egress, calibrated consensus confidence, race-proof or unforgeable team locks, an operating-system sandbox, universal cost caps, transitive license clearance, or a vulnerability-response SLA. Do not treat those claims in the historical entries below as current guarantees. The recorded 2.54x benchmark belongs only to the specific run and success counts in `results/benchmark_20260306.json`; it is not a general performance claim. Version `0.1.3` is package metadata, not by itself evidence of a published package. One historical pilot error-path string was generalized for publication; the recorded experiment metrics are unchanged.
