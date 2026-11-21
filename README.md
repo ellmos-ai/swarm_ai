@@ -65,7 +65,7 @@ More implementation detail is in [Architecture and coordination](docs/ARCHITECTU
 
 Version `0.1.3` is declared in `pyproject.toml`; that metadata alone does not imply a package release. This repository's source is licensed under [MIT](LICENSE). [`THIRD_PARTY_LICENSES.md`](THIRD_PARTY_LICENSES.md) lists selected declared dependencies and is not a transitive dependency audit or a blanket commercial-use determination.
 
-Report vulnerabilities through [GitHub Security Advisories](https://github.com/ellmos-ai/swarm_ai/security/advisories/new) or an address listed in [`SECURITY.md`](SECURITY.md). The project does not publish a response-time SLA. Consult the live [GitHub Actions workflow](https://github.com/ellmos-ai/swarm_ai/actions/workflows/ci.yml) for current CI status.
+Report vulnerabilities through [GitHub Security Advisories](https://github.com/ellmos-ai/swarm_ai/security/advisories/new); private vulnerability reporting is enabled for this repository, and [`SECURITY.md`](SECURITY.md) lists what to include. The project does not publish a response-time SLA. Consult the live [GitHub Actions workflow](https://github.com/ellmos-ai/swarm_ai/actions/workflows/ci.yml) for current CI status.
 
 See [`README_de.md`](README_de.md) for the German overview, [`README_es.md`](README_es.md) for the Spanish overview, and [`CHANGELOG.md`](CHANGELOG.md) for dated project history.
 

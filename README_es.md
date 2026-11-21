@@ -65,7 +65,7 @@ Encontrarás más detalles de implementación en [Arquitectura y coordinación](
 
 `pyproject.toml` declara la versión `0.1.3`; esos metadatos por sí solos no implican que se haya publicado un paquete. El código fuente de este repositorio está bajo la [licencia MIT](LICENSE). [`THIRD_PARTY_LICENSES.md`](THIRD_PARTY_LICENSES.md) enumera algunas dependencias declaradas; no es una auditoría de dependencias transitivas ni una determinación general sobre el uso comercial.
 
-Informa de vulnerabilidades mediante [GitHub Security Advisories](https://github.com/ellmos-ai/swarm_ai/security/advisories/new) o a una dirección indicada en [`SECURITY.md`](SECURITY.md). El proyecto no publica un SLA de tiempo de respuesta. Consulta el [flujo de trabajo de GitHub Actions](https://github.com/ellmos-ai/swarm_ai/actions/workflows/ci.yml) en vivo para ver el estado actual de CI.
+Informa de vulnerabilidades mediante [GitHub Security Advisories](https://github.com/ellmos-ai/swarm_ai/security/advisories/new); la notificación privada de vulnerabilidades está activada en este repositorio y [`SECURITY.md`](SECURITY.md) indica qué incluir. El proyecto no publica un SLA de tiempo de respuesta. Consulta el [flujo de trabajo de GitHub Actions](https://github.com/ellmos-ai/swarm_ai/actions/workflows/ci.yml) en vivo para ver el estado actual de CI.
 
 Consulta [`README_de.md`](README_de.md) para la descripción general en alemán, [`README.md`](README.md) para la versión en inglés y [`CHANGELOG.md`](CHANGELOG.md) para el historial fechado del proyecto.
 

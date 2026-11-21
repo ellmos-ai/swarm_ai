@@ -65,7 +65,7 @@ swarm-consensus --question "What is the capital of Australia?" --agents 3 --max-
 
 バージョン`0.1.3`は`pyproject.toml`で宣言されていますが、そのメタデータだけではパッケージの公開を意味しません。このリポジトリのソースコードは[MITライセンス](LICENSE)で提供されています。[`THIRD_PARTY_LICENSES.md`](THIRD_PARTY_LICENSES.md)には一部の宣言済み依存関係が記載されていますが、推移的依存関係の監査ではなく、商用利用を一律に判断するものでもありません。
 
-脆弱性は[GitHub Security Advisories](https://github.com/ellmos-ai/swarm_ai/security/advisories/new)、または[`SECURITY.md`](SECURITY.md)に記載された連絡先へ報告してください。プロジェクトは応答時間のSLAを公表していません。現在のCI状況は[GitHub Actionsのワークフロー](https://github.com/ellmos-ai/swarm_ai/actions/workflows/ci.yml)で確認してください。
+脆弱性は[GitHub Security Advisories](https://github.com/ellmos-ai/swarm_ai/security/advisories/new)から非公開で報告してください（このリポジトリでは非公開の脆弱性報告が有効です）。報告に含める内容は[`SECURITY.md`](SECURITY.md)に記載しています。プロジェクトは応答時間のSLAを公表していません。現在のCI状況は[GitHub Actionsのワークフロー](https://github.com/ellmos-ai/swarm_ai/actions/workflows/ci.yml)で確認してください。
 
 ドイツ語の概要は[`README_de.md`](README_de.md)、スペイン語の概要は[`README_es.md`](README_es.md)をご覧ください。日付順のプロジェクト履歴は[`CHANGELOG.md`](CHANGELOG.md)にあります。
 

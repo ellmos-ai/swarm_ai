@@ -65,7 +65,7 @@ swarm-consensus --question "What is the capital of Australia?" --agents 3 --max-
 
 الإصدار `0.1.3` مُعلن في `pyproject.toml`؛ وهذه البيانات الوصفية وحدها لا تعني إصدار الحزمة. مصدر هذا المستودع مرخّص بموجب [MIT](LICENSE). يسرد [`THIRD_PARTY_LICENSES.md`](THIRD_PARTY_LICENSES.md) مجموعة مختارة من التبعيات المعلنة، ولا يُعدّ تدقيقًا للتبعيات العابرة أو حكمًا عامًا بشأن الاستخدام التجاري.
 
-أبلغ عن الثغرات عبر [إشعارات الأمان من GitHub](https://github.com/ellmos-ai/swarm_ai/security/advisories/new) أو عنوان مدرج في [`SECURITY.md`](SECURITY.md). لا ينشر المشروع اتفاقية مستوى خدمة لزمن الاستجابة. راجع [سير عمل GitHub Actions](https://github.com/ellmos-ai/swarm_ai/actions/workflows/ci.yml) المباشر لمعرفة حالة CI الحالية.
+أبلغ عن الثغرات عبر [إشعارات الأمان من GitHub](https://github.com/ellmos-ai/swarm_ai/security/advisories/new)؛ الإبلاغ الخاص عن الثغرات مُفعَّل لهذا المستودع، ويوضح [`SECURITY.md`](SECURITY.md) ما ينبغي تضمينه في البلاغ. لا ينشر المشروع اتفاقية مستوى خدمة لزمن الاستجابة. راجع [سير عمل GitHub Actions](https://github.com/ellmos-ai/swarm_ai/actions/workflows/ci.yml) المباشر لمعرفة حالة CI الحالية.
 
 راجع [`README_de.md`](README_de.md) للاطلاع على النظرة العامة بالألمانية، و[`README_es.md`](README_es.md) للنظرة العامة بالإسبانية، و[`CHANGELOG.md`](CHANGELOG.md) لسجل المشروع المؤرّخ.
 

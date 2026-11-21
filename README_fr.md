@@ -65,7 +65,7 @@ Vous trouverez davantage de détails sur l’implémentation dans [Architecture 
 
 La version `0.1.3` est déclarée dans `pyproject.toml` ; ces métadonnées seules ne signifient pas qu’un paquet a été publié. Le code source de ce dépôt est sous licence [MIT](LICENSE). [`THIRD_PARTY_LICENSES.md`](THIRD_PARTY_LICENSES.md) répertorie une sélection de dépendances déclarées et ne constitue ni un audit des dépendances transitives ni une conclusion générale sur l’autorisation d’un usage commercial.
 
-Signalez les vulnérabilités via [GitHub Security Advisories](https://github.com/ellmos-ai/swarm_ai/security/advisories/new) ou à une adresse indiquée dans [`SECURITY.md`](SECURITY.md). Le projet ne publie aucun SLA sur les délais de réponse. Consultez le [workflow GitHub Actions](https://github.com/ellmos-ai/swarm_ai/actions/workflows/ci.yml) en direct pour connaître l’état actuel de la CI.
+Signalez les vulnérabilités via [GitHub Security Advisories](https://github.com/ellmos-ai/swarm_ai/security/advisories/new) ; le signalement privé de vulnérabilités est activé pour ce dépôt et [`SECURITY.md`](SECURITY.md) précise les informations à fournir. Le projet ne publie aucun SLA sur les délais de réponse. Consultez le [workflow GitHub Actions](https://github.com/ellmos-ai/swarm_ai/actions/workflows/ci.yml) en direct pour connaître l’état actuel de la CI.
 
 Voir [`README_de.md`](README_de.md) pour la présentation allemande, [`README_es.md`](README_es.md) pour la présentation espagnole et [`CHANGELOG.md`](CHANGELOG.md) pour l’historique daté du projet.
 

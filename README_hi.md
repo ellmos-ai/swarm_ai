@@ -65,7 +65,7 @@ swarm-consensus --question "What is the capital of Australia?" --agents 3 --max-
 
 संस्करण `0.1.3` की घोषणा `pyproject.toml` में है; केवल यह मेटाडेटा पैकेज रिलीज़ होने का संकेत नहीं देता। इस रिपॉज़िटरी का स्रोत [MIT](LICENSE) लाइसेंस के तहत है। [`THIRD_PARTY_LICENSES.md`](THIRD_PARTY_LICENSES.md) कुछ घोषित निर्भरताओं की सूची देता है; यह पारगामी निर्भरता-जाँच या व्यावसायिक उपयोग की सार्वभौमिक मंज़ूरी नहीं है।
 
-कमज़ोरियों की सूचना [GitHub Security Advisories](https://github.com/ellmos-ai/swarm_ai/security/advisories/new) के माध्यम से दें या [`SECURITY.md`](SECURITY.md) में दिए गए किसी पते पर भेजें। परियोजना प्रतिक्रिया-समय SLA प्रकाशित नहीं करती। CI की मौजूदा स्थिति के लिए लाइव [GitHub Actions वर्कफ़्लो](https://github.com/ellmos-ai/swarm_ai/actions/workflows/ci.yml) देखें।
+कमज़ोरियों की सूचना [GitHub Security Advisories](https://github.com/ellmos-ai/swarm_ai/security/advisories/new) के माध्यम से निजी रूप से दें; इस रिपॉज़िटरी के लिए निजी कमज़ोरी-रिपोर्टिंग सक्षम है, और रिपोर्ट में क्या शामिल करें यह [`SECURITY.md`](SECURITY.md) में बताया गया है। परियोजना प्रतिक्रिया-समय SLA प्रकाशित नहीं करती। CI की मौजूदा स्थिति के लिए लाइव [GitHub Actions वर्कफ़्लो](https://github.com/ellmos-ai/swarm_ai/actions/workflows/ci.yml) देखें।
 
 जर्मन परिचय के लिए [`README_de.md`](README_de.md), स्पैनिश परिचय के लिए [`README_es.md`](README_es.md), और तारीख़वार परियोजना इतिहास के लिए [`CHANGELOG.md`](CHANGELOG.md) देखें।
 

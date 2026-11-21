@@ -103,3 +103,23 @@ def test_utf8_integrity_across_markdown():
     for markdown_file in markdown_files:
         content = markdown_file.read_text(encoding="utf-8")
         assert "\ufffd" not in content, f"Replacement character detected in {markdown_file}"
+
+
+def test_security_reporting_uses_only_the_enabled_advisory_channel():
+    """SECURITY.md once listed four e-mail addresses that could not receive mail.
+
+    Two domains did not resolve and one had no mail exchanger, so every report
+    sent there was silently lost. The only supported channel is GitHub's
+    private vulnerability reporting; no README may point readers at addresses.
+    """
+    import re
+
+    advisory = "https://github.com/ellmos-ai/swarm_ai/security/advisories/new"
+    security = (ROOT / "SECURITY.md").read_text(encoding="utf-8")
+    assert security.count(advisory) == 2  # English and German section
+    listed = re.findall(r"`[^`\s]+@[^`\s]+\.[a-z]{2,}`", security)
+    assert listed == [], f"SECURITY.md lists e-mail addresses again: {listed}"
+    for readme in sorted(ROOT.glob("README*.md")):
+        text = readme.read_text(encoding="utf-8")
+        assert advisory in text, f"{readme.name} lost the advisory link"
+        assert "@ellmos.ai" not in text and "@open-bricks.org" not in text

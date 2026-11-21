@@ -65,7 +65,7 @@ swarm-consensus --question "What is the capital of Australia?" --agents 3 --max-
 
 В метаданных `pyproject.toml` указана версия `0.1.3`; сами по себе эти метаданные не означают, что пакет выпущен. Исходный код этого репозитория распространяется по [лицензии MIT](LICENSE). В файле [`THIRD_PARTY_LICENSES.md`](THIRD_PARTY_LICENSES.md) перечислены некоторые заявленные зависимости. Этот список не является аудитом транзитивных зависимостей и не даёт общего заключения о допустимости коммерческого использования.
 
-Об уязвимостях сообщайте через [GitHub Security Advisories](https://github.com/ellmos-ai/swarm_ai/security/advisories/new) или по адресу, указанному в [`SECURITY.md`](SECURITY.md). Проект не публикует SLA по срокам ответа. Текущий статус CI см. в актуальном [workflow GitHub Actions](https://github.com/ellmos-ai/swarm_ai/actions/workflows/ci.yml).
+Об уязвимостях сообщайте через [GitHub Security Advisories](https://github.com/ellmos-ai/swarm_ai/security/advisories/new); приватные сообщения об уязвимостях для этого репозитория включены, а в [`SECURITY.md`](SECURITY.md) указано, что приложить к отчёту. Проект не публикует SLA по срокам ответа. Текущий статус CI см. в актуальном [workflow GitHub Actions](https://github.com/ellmos-ai/swarm_ai/actions/workflows/ci.yml).
 
 См. обзор на немецком языке в [`README_de.md`](README_de.md), обзор на испанском языке в [`README_es.md`](README_es.md), а датированную историю проекта — в [`CHANGELOG.md`](CHANGELOG.md).
 
