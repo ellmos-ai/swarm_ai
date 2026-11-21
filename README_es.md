@@ -56,7 +56,7 @@ Consulta `--help` de cada comando para ver sus opciones. El consenso, la traducc
 - En el consenso, `confidence` es el número de votos del ganador dividido entre todos los resultados de los trabajadores; `agreement_ratio` se calcula solo con las respuestas válidas. Ninguno de los dos valores es una probabilidad calibrada, y la concordancia no demuestra que los datos sean correctos.
 - Los bloqueos de equipo usan reclamaciones atómicas de archivos y registros de asistencia por participante para coordinar procesos que cooperan. No impiden escrituras de procesos que ignoren o modifiquen el protocolo.
 - El programa hereda el entorno y los permisos del proceso que lo invoca. `RunAsInvoker` no es un entorno aislado del sistema operativo ni garantiza que el programa no se ejecute con privilegios elevados.
-- Los idiomas de destino de la traducción `de`, `en`, `es`, `zh`, `ja` y `ru` son idiomas de salida, no seis idiomas de una interfaz localizada. La ayuda de CLI combina inglés y alemán; la GUI experimental de Tk tiene etiquetas en alemán.
+- Los idiomas de destino de la traducción `de`, `en`, `es`, `zh`, `ja` y `ru` son idiomas de salida, no seis idiomas de una interfaz localizada. La ayuda de CLI está en inglés; algunos mensajes de progreso en tiempo de ejecución siguen en alemán; la GUI experimental de Tk tiene etiquetas en alemán.
 - El archivo de benchmark [`results/benchmark_20260306.json`](results/benchmark_20260306.json) registra una carga de trabajo histórica. Sus mediciones no predicen el rendimiento general.
 
 Encontrarás más detalles de implementación en [Arquitectura y coordinación](docs/ARCHITECTURE.md). Las tareas abiertas actuales están en [Tareas abiertas de `TODO.md`](TODO.md#offene-aufgaben).

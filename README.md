@@ -56,7 +56,7 @@ Use each command's `--help` for options. Consensus, translation, and summarizati
 - Consensus `confidence` is the winner count divided by all worker results; `agreement_ratio` uses valid answers only. Neither is a calibrated probability, and agreement does not establish factual correctness.
 - Team locks use atomic file claims and per-participant attendance records to coordinate cooperating processes. They do not prevent writes from processes that ignore or edit the protocol.
 - The program inherits the caller's environment and permissions. `RunAsInvoker` is not an operating-system sandbox and does not guarantee non-elevation.
-- Translation targets `de`, `en`, `es`, `zh`, `ja`, and `ru` are output languages, not six localized UI languages. CLI help mixes English and German; the experimental Tk GUI has German labels.
+- Translation targets `de`, `en`, `es`, `zh`, `ja`, and `ru` are output languages, not six localized UI languages. CLI help is English; some runtime progress messages are still German; the experimental Tk GUI has German labels.
 - The benchmark file [`results/benchmark_20260306.json`](results/benchmark_20260306.json) records one historical workload. Its measurements do not predict general performance.
 
 More implementation detail is in [Architecture and coordination](docs/ARCHITECTURE.md). Current open tasks are under [Offene Aufgaben in `TODO.md`](TODO.md#offene-aufgaben).

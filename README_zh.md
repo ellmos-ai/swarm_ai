@@ -56,7 +56,7 @@ swarm-consensus --question "What is the capital of Australia?" --agents 3 --max-
 - 共识结果中的 `confidence` 是支持胜出答案的结果数除以所有工作者结果数；`agreement_ratio` 仅以有效答案为分母。二者都不是经过校准的概率，一致性也不能证明答案在事实上正确。
 - 团队锁通过原子化的文件认领和每位参与者的出席记录来协调遵守协议的进程。它们无法阻止忽略或修改该协议的进程写入。
 - 程序继承调用者的环境和权限。`RunAsInvoker` 不是操作系统沙箱，也不保证程序不会以提升的权限运行。
-- 翻译目标 `de`、`en`、`es`、`zh`、`ja` 和 `ru` 是输出语言，并不代表界面有六种本地化语言。CLI 帮助混用英语和德语；实验性的 Tk GUI 使用德语标签。
+- 翻译目标 `de`、`en`、`es`、`zh`、`ja` 和 `ru` 是输出语言，并不代表界面有六种本地化语言。CLI 帮助为英语，部分运行时进度消息仍为德语；实验性的 Tk GUI 使用德语标签。
 - 基准测试文件 [`results/benchmark_20260306.json`](results/benchmark_20260306.json) 记录了一次历史工作负载。其测量结果无法预测一般情况下的性能。
 
 更多实现细节请见[架构与协作](docs/ARCHITECTURE.md)。当前未完成的任务见 [`TODO.md` 中的未完成任务](TODO.md#offene-aufgaben)。

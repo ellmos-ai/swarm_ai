@@ -758,36 +758,36 @@ def show_inventory(namespace=None, target_lang='en', source_lang='de'):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Schwarm-Übersetzung mit Parallel-Chunks"
+        description="Swarm translation with parallel chunks"
     )
     parser.add_argument(
         "--namespace", "-n",
-        help="Nur einen Namespace übersetzen (cli/docs/help/gui/skills)",
+        help="Translate one namespace only (cli/docs/help/gui/skills)",
     )
     parser.add_argument(
         "--chunk-size", type=int, default=DEFAULT_CHUNK_SIZE,
-        help=f"Texte pro API-Call (default: {DEFAULT_CHUNK_SIZE})",
+        help=f"Texts per API call (default: {DEFAULT_CHUNK_SIZE})",
     )
     parser.add_argument(
         "--workers", "-w", type=int, default=DEFAULT_WORKERS,
-        help=f"Parallele Threads (default: {DEFAULT_WORKERS})",
+        help=f"Parallel threads (default: {DEFAULT_WORKERS})",
     )
     parser.add_argument(
         "--limit", type=int, default=0,
-        help="Max. Texte; positiver Wert ist für Live-Läufe erforderlich",
+        help="Maximum number of texts; a positive value is required for live runs",
     )
     parser.add_argument(
         "--max-budget-usd", type=float,
-        help="Konservative Kostenobergrenze; für Live-Läufe erforderlich",
+        help="Conservative cost ceiling; required for live runs",
     )
-    parser.add_argument("--dry-run", action="store_true", help="Nur anzeigen, kein API-Call")
-    parser.add_argument("--inventory", action="store_true", help="Inventar anzeigen")
+    parser.add_argument("--dry-run", action="store_true", help="Show what would be sent, no API call")
+    parser.add_argument("--inventory", action="store_true", help="Show the inventory of missing translations")
     parser.add_argument(
         "--init-db", action="store_true",
-        help="Standalone-Übersetzungsdatenbank initialisieren und beenden",
+        help="Initialize the standalone translation database and exit",
     )
-    parser.add_argument("--source", default="de", help="Quellsprache (default: de)")
-    parser.add_argument("--target", default="en", help="Zielsprache (default: en)")
+    parser.add_argument("--source", default="de", help="Source language (default: de)")
+    parser.add_argument("--target", default="en", help="Target language (default: en)")
 
     args = parser.parse_args()
 

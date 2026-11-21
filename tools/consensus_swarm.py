@@ -435,7 +435,7 @@ def run_consensus(question: str, num_agents: int = DEFAULT_AGENTS,
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Konsensus-Schwarm: Mehrere LLM-Agenten beantworten dieselbe Frage"
+        description="Consensus swarm: several LLM agents answer the same question"
     )
     parser.add_argument(
         "question", nargs="?", default=None,
@@ -478,7 +478,7 @@ def main():
     )
     parser.add_argument(
         "--json", action="store_true", dest="json_output",
-        help="Ausgabe als JSON"
+        help="Print the result as JSON"
     )
 
     args = parser.parse_args()

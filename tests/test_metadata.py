@@ -129,3 +129,19 @@ def test_security_reporting_uses_only_the_enabled_advisory_channel():
         text = readme.read_text(encoding="utf-8")
         assert advisory in text, f"{readme.name} lost the advisory link"
         assert "@ellmos.ai" not in text and "@open-bricks.org" not in text
+
+
+def test_cli_help_of_every_entry_point_is_english():
+    """The README promises English CLI help; this used to be German in four tools."""
+    import re
+    import subprocess
+    import sys
+
+    german = re.compile(r"[äöüÄÖÜß]|\b(und|nicht|für|Anzahl|Ausgabe|Nur|anzeigen)\b")
+    for module in ("benchmark", "consensus_swarm", "translate_swarm", "summarize_chunks", "stigmergy_init"):
+        out = subprocess.run(
+            [sys.executable, "-m", f"tools.{module}", "--help"],
+            cwd=ROOT, capture_output=True, text=True, encoding="utf-8", timeout=60, check=True,
+        ).stdout
+        hits = sorted({m.group(0) for m in german.finditer(out)})
+        assert hits == [], f"tools.{module} --help still contains German: {hits}"

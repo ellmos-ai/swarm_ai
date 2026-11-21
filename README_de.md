@@ -56,7 +56,7 @@ Die Grenze ist eine positive, endliche Schätzungsgrenze des Werkzeugs; die Prov
 - `confidence` beim Konsens ist die Anzahl der Gewinnerstimmen geteilt durch alle Worker-Ergebnisse; `agreement_ratio` berücksichtigt nur gültige Antworten. Keiner der Werte ist eine kalibrierte Wahrscheinlichkeit, und Übereinstimmung beweist keine Richtigkeit.
 - Team-Locks nutzen atomare Datei-Claims und getrennte Anwesenheitseinträge zur Koordination kooperierender Prozesse. Sie verhindern keine Schreibzugriffe von Prozessen, die das Verfahren ignorieren oder verändern.
 - Das Programm übernimmt die Umgebung und Berechtigungen des aufrufenden Kontos. `RunAsInvoker` ist keine Betriebssystem-Sandbox und garantiert keine Ausführung ohne erhöhte Rechte.
-- Die Übersetzungsziele `de`, `en`, `es`, `zh`, `ja` und `ru` sind Ausgabe-Sprachen und keine sechs lokalisierten UI-Sprachen. Die CLI-Hilfe mischt Englisch und Deutsch; die experimentelle Tk-GUI hat deutsche Beschriftungen.
+- Die Übersetzungsziele `de`, `en`, `es`, `zh`, `ja` und `ru` sind Ausgabe-Sprachen und keine sechs lokalisierten UI-Sprachen. Die CLI-Hilfe ist englisch, einzelne Laufzeit-Fortschrittsmeldungen sind noch deutsch; die experimentelle Tk-GUI hat deutsche Beschriftungen.
 - Die Benchmark-Datei [`results/benchmark_20260306.json`](results/benchmark_20260306.json) dokumentiert einen historischen Lauf mit einer bestimmten Arbeitslast. Die Messwerte sagen keine allgemeine Leistung voraus.
 
 Mehr Implementierungsdetails stehen unter [Architektur und Koordination](docs/ARCHITECTURE.md). Aktuelle Aufgaben sind im Abschnitt [Offene Aufgaben in `TODO.md`](TODO.md#offene-aufgaben) aufgeführt.

@@ -23,7 +23,7 @@ These are libraries and examples, not a hosted agent service or production relia
 - Team-lock claims are cooperative file-based coordination signals. Processes that ignore or edit the protocol can bypass them.
 - Consensus, translation, and summarization require positive finite estimated-cost caps. `ClaudeRunner` has an optional cap; no single universal cap applies to every provider or workflow.
 - The application runs with the caller's environment and permissions. `RunAsInvoker` is not an OS sandbox and does not guarantee non-elevation.
-- The translation tool supports target text languages `de`, `en`, `es`, `zh`, `ja`, and `ru`. These are translation targets, not six localized UI languages. CLI help mixes English and German; the experimental Tk GUI has German labels.
+- The translation tool supports target text languages `de`, `en`, `es`, `zh`, `ja`, and `ru`. These are translation targets, not six localized UI languages. CLI help is English; some runtime progress messages are still German; the experimental Tk GUI has German labels.
 
 ## Useful files
 
