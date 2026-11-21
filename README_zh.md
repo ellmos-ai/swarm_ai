@@ -72,5 +72,8 @@ swarm-consensus --question "What is the capital of Australia?" --agents 3 --max-
 ## 相关项目
 
 - [COMA](https://github.com/ellmos-ai/coma) — 一个可选的 Spawner/adapter 提供方桥接层；安装 `providers` 扩展后，Swarm 会使用它。
-- [Roshambo](https://github.com/ellmos-ai/roshambo) — 一个独立工具包，通过可序列化租约和结果记忆来协调独立启动的智能体。
 - [MarbleRun](https://github.com/ellmos-ai/marblerun) — 一个用于配置多智能体链的独立工具包。
+- [clutch](https://github.com/ellmos-ai/clutch) — 提供本模块在 `ellmos-module.v2.json` 中列为可选的 `routing.default` 能力。
+- [lock-master](https://github.com/ellmos-ai/lock-master) — 完整的文件锁系统（带作用域和过期时间的独占锁与团队锁）；本仓库的 `tools/team_lock.py` 只是供遵守它的进程使用的小型协作式认领协议。
+- [ellmos-scheduler](https://github.com/ellmos-ai/ellmos-scheduler) — 以租约和运行凭据执行 cron 与间隔任务，可用于按计划启动 Swarm 运行。
+- [compare-race](https://github.com/ellmos-ai/compare-race) — 把同一提示发送给多个模型，并由一个模型评判答案——这是定性比较，而 `swarm-consensus` 统计的是相同答案。

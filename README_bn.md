@@ -72,5 +72,8 @@ swarm-consensus --question "What is the capital of Australia?" --agents 3 --max-
 ## সংশ্লিষ্ট প্রকল্প
 
 - [COMA](https://github.com/ellmos-ai/coma) — Swarm-এ `providers` এক্সট্রা ইনস্টল থাকলে ব্যবহৃত ঐচ্ছিক Spawner/adapter প্রোভাইডার সেতু।
-- [Roshambo](https://github.com/ellmos-ai/roshambo) — স্বতন্ত্রভাবে চালু করা এজেন্টদের সমন্বয়ে সিরিয়ালাইজ করা যায় এমন লিজ ও ফলাফল-স্মৃতি ব্যবহারের পৃথক টুলকিট।
 - [MarbleRun](https://github.com/ellmos-ai/marblerun) — বহু-এজেন্ট চেইন কনফিগার করার পৃথক টুলকিট।
+- [clutch](https://github.com/ellmos-ai/clutch) — এই মডিউল `ellmos-module.v2.json`-এ যে `routing.default` সক্ষমতাকে ঐচ্ছিক হিসেবে উল্লেখ করে, সেটি সরবরাহ করে।
+- [lock-master](https://github.com/ellmos-ai/lock-master) — পূর্ণাঙ্গ ফাইল-লক ব্যবস্থা (পরিসর ও মেয়াদসহ এক্সক্লুসিভ ও টিম লক); এখানে `tools/team_lock.py` কেবল সেসব প্রক্রিয়ার জন্য একটি ছোট সহযোগিতামূলক ক্লেইম প্রোটোকল, যারা এটি মেনে চলে।
+- [ellmos-scheduler](https://github.com/ellmos-ai/ellmos-scheduler) — লিজ ও রান-রসিদসহ cron ও বিরতিভিত্তিক কাজ চালায়; এর মাধ্যমে নির্ধারিত সময়ে swarm রান শুরু করা যায়।
+- [compare-race](https://github.com/ellmos-ai/compare-race) — একটি প্রম্পট কয়েকটি মডেলে পাঠায় এবং একটি মডেলকে উত্তরগুলো বিচার করতে দেয় — এটি গুণগত তুলনা, যেখানে `swarm-consensus` অভিন্ন উত্তর গণনা করে।

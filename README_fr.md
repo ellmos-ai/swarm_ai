@@ -72,5 +72,8 @@ Voir [`README_de.md`](README_de.md) pour la présentation allemande, [`README_es
 ## Projets associés
 
 - [COMA](https://github.com/ellmos-ai/coma) — une passerelle facultative entre Spawner et les adaptateurs de fournisseurs, utilisée par Swarm lorsque l’option `providers` est installée.
-- [Roshambo](https://github.com/ellmos-ai/roshambo) — une boîte à outils distincte pour coordonner des agents lancés indépendamment à l’aide de baux sérialisables et d’une mémoire des résultats.
 - [MarbleRun](https://github.com/ellmos-ai/marblerun) — une boîte à outils distincte pour configurer des chaînes multi-agents.
+- [clutch](https://github.com/ellmos-ai/clutch) — fournit la capacité `routing.default` que ce module déclare comme facultative dans `ellmos-module.v2.json`.
+- [lock-master](https://github.com/ellmos-ai/lock-master) — le système complet de verrous de fichiers (verrous exclusifs et d’équipe avec portée et expiration) ; ici, `tools/team_lock.py` n’est qu’un petit protocole coopératif de réservation pour les processus qui le respectent.
+- [ellmos-scheduler](https://github.com/ellmos-ai/ellmos-scheduler) — exécute des tâches cron et à intervalle avec des baux et des reçus d’exécution ; il permet de lancer des essaims selon un calendrier.
+- [compare-race](https://github.com/ellmos-ai/compare-race) — envoie un prompt à plusieurs modèles et laisse un modèle juger les réponses — une comparaison qualitative, alors que `swarm-consensus` compte les réponses identiques.

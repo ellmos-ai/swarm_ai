@@ -72,5 +72,8 @@ swarm-consensus --question "What is the capital of Australia?" --agents 3 --max-
 ## مشاريع ذات صلة
 
 - [COMA](https://github.com/ellmos-ai/coma) — جسر اختياري للمزوّدين يربط Spawner بمحوّل ويستخدمه Swarm عند تثبيت الإضافة `providers`.
-- [Roshambo](https://github.com/ellmos-ai/roshambo) — مجموعة أدوات منفصلة لتنسيق وكلاء يُطلَقون بشكل مستقل عبر حجوزات مؤقتة قابلة للتسلسل وذاكرة للنتائج.
 - [MarbleRun](https://github.com/ellmos-ai/marblerun) — مجموعة أدوات منفصلة لإعداد سلاسل متعددة الوكلاء.
+- [clutch](https://github.com/ellmos-ai/clutch) — يوفّر قدرة `routing.default` التي تذكرها هذه الوحدة اختياريةً في `ellmos-module.v2.json`.
+- [lock-master](https://github.com/ellmos-ai/lock-master) — نظام أقفال الملفات الكامل (أقفال حصرية وأقفال فريق مع نطاق وانتهاء صلاحية)؛ أما `tools/team_lock.py` هنا فهو مجرد بروتوكول مطالبة تعاوني صغير للعمليات التي تلتزم به.
+- [ellmos-scheduler](https://github.com/ellmos-ai/ellmos-scheduler) — ينفّذ مهام cron والمهام الدورية مع حجوزات مؤقتة وإيصالات تشغيل؛ ويمكن استخدامه لبدء تشغيلات السرب وفق جدول زمني.
+- [compare-race](https://github.com/ellmos-ai/compare-race) — يرسل الموجّه نفسه إلى عدة نماذج ويترك نموذجًا يحكم على الإجابات — مقارنة نوعية، بينما يعدّ `swarm-consensus` الإجابات المتطابقة.
