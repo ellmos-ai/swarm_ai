@@ -70,12 +70,18 @@ def test_gitignore_multi_host_conflict_and_lock_defense():
         assert pattern in gitignore_text, f"Pattern '{pattern}' missing from .gitignore"
 
 
-def test_ruff_configuration_parity():
+def test_ruff_configuration_has_a_single_effective_source():
+    """ruff prefers ruff.toml over pyproject.toml.
+
+    This test used to require an expanded rule set in pyproject.toml. That
+    block was shadowed by ruff.toml and never ran, so the test protected a
+    dead configuration. It now enforces one effective source.
+    """
     pyproject_text = (ROOT / "pyproject.toml").read_text(encoding="utf-8")
-    assert "[tool.ruff]" in pyproject_text
-    assert 'target-version = "py310"' in pyproject_text
-    for rule in ("E4", "E7", "E9", "F", "W", "I", "B", "SIM", "C4", "RUF"):
-        assert f'"{rule}"' in pyproject_text
+    assert "[tool.ruff" not in pyproject_text, "a second ruff config would be ignored"
+    ruff_text = (ROOT / "ruff.toml").read_text(encoding="utf-8")
+    assert 'target-version = "py310"' in ruff_text
+    assert 'select = ["E4", "E7", "E9", "F"]' in ruff_text
 
 
 def test_pep621_license_files_contract():
