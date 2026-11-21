@@ -1,5 +1,12 @@
 # Changelog
 
+## After-care correction — 2026-11-21
+
+- **Security reporting:** `SECURITY.md` and every README pointed to four e-mail addresses that could not receive mail (two domains without DNS, one without a mail exchanger), and private vulnerability reporting was disabled on the repository. Reporting is now enabled and is the single documented channel; a regression test keeps the addresses out.
+- **Lint configuration:** `ruff.toml` takes precedence over `pyproject.toml`, so the expanded rule set announced in the 0.1.2 entries below (including isort `I`) never ran. The shadowed `[tool.ruff]` block was removed; `ruff.toml` is the single source with the classic `E4/E7/E9/F` set. Adopting the wider set is tracked as an open task — it currently reports 20 findings.
+- **CLI language:** `--help` of all five console scripts is now English (it was German in four of them, and `swarm-benchmark` introduced itself as "llmauto Benchmark"). Some runtime progress messages and the experimental Tk GUI are still German.
+- **Related projects:** the archived Roshambo entry was removed; clutch, lock-master, ellmos-scheduler and compare-race were added with the relation each one has to this toolkit.
+
 ## Documentation translations — 2026-11-02
 
 - Completed the eleven-language documentation set with full Hindi, Arabic, Bengali, and Portuguese guides, reciprocal navigation, and source-distribution inclusion. These are documentation languages, not additional runtime UI locales.

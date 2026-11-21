@@ -9,7 +9,7 @@ Dieses TODO ist der öffentliche Aufgaben-Einstieg. Historische Befunde bleiben
 
 | Category | Status | Nachweis |
 |---|---|---|
-| Kernlogik | PASS | 172 Kern- plus 2 SDK-Vertragstests, `compileall`, Ruff |
+| Kernlogik | PASS | 201 Testitems (gemessen 2026-11-21, `pytest -q` ohne `coma`: 197 passed, 4 skipped), `compileall`, Ruff |
 | Lokale Sicherheit | PASS | Bandit ohne High-Severity-Befund; Legacy-Experimente fail-closed |
 | Datenbanken | PASS | Standalone-Init für Stigmergie, Übersetzung und Summaries |
 | Lieferkette | PASS | Actions SHA-gepinnt, CodeQL und Dependabot ergänzt |
@@ -33,6 +33,18 @@ Dieses TODO ist der öffentliche Aufgaben-Einstieg. Historische Befunde bleiben
   Anthropic-SDK-Versionen prüfen. (Erledigt 2026-07-28: `anthropic>=0.40.0`;
   CI testet Minimum und Latest auf Python 3.10/3.13. Version 0.39.0 scheitert
   mit aktuellem HTTPX bereits bei der Client-Konstruktion.)
+
+- [ ] Ruff-Regelsatz bewusst erweitern: Der früher in `pyproject.toml` stehende Satz
+  (`W`, `I`, `B`, `SIM`, `C4`, `RUF`) lief nie, weil `ruff.toml` Vorrang hat. Mit ruff 0.17.6
+  meldet er 20 Befunde (18x `I001`, `RUF001`, `SIM108`). Erst beheben, dann in `ruff.toml`
+  aufnehmen und ruff in der CI auf eine Version pinnen.
+- [ ] Laufzeitmeldungen ins Englische überführen: `--help` ist seit 2026-11-21 englisch, aber
+  Fortschritts- und Ergebnisausgaben in `benchmark.py`, `translate_swarm.py` und
+  `summarize_chunks.py` sind noch deutsch (ein Test prüft `Geschätzte Kosten`); die
+  experimentelle Tk-GUI ebenso.
+- [ ] Experiment-GUI neutral benennen: „Karte des Rumtreibers“ ist ein Begriff aus einem
+  bekannten Fremdwerk (Fenstertitel in `experiments/dungeon/marauders_map_gui.py`,
+  Überschrift in `experiments/pilot_2026-02/maintenance_swarm.py`).
 
 ## Im Review 2026-07-15 erledigt
 
