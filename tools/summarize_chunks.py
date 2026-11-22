@@ -654,24 +654,24 @@ class ChunkSummarizer:
 def main() -> int:
     """CLI-Einstieg."""
     parser = argparse.ArgumentParser(
-        description="Parallel-Chunks Stufe 3: LLM-Zusammenfassungen für Chunks"
+        description="Parallel chunks, stage 3: LLM summaries for stored chunks"
     )
     parser.add_argument(
         '--model',
         choices=['haiku', 'sonnet'],
         default='haiku',
-        help='LLM-Modell (haiku = schnell & günstig, sonnet = präzise)'
+        help='LLM model (haiku = fast and low-cost, sonnet = more precise)'
     )
     parser.add_argument(
         '--batch-size',
         type=int,
         default=10,
-        help='Wie viele Chunks pro Batch? (Rate-Limiting)'
+        help='Chunks per batch (rate limiting)'
     )
     parser.add_argument(
         '--dry-run',
         action='store_true',
-        help='Simulation (keine DB-Änderungen)'
+        help='Simulate only (no database changes)'
     )
     parser.add_argument(
         '--db-path', type=Path, default=DB_PATH,

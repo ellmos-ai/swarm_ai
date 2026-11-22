@@ -56,7 +56,7 @@ Utilisez `--help` de chaque commande pour connaître les options. Le consensus, 
 - Pour le consensus, `confidence` correspond au nombre de résultats en faveur du gagnant divisé par le nombre total de résultats des agents ; `agreement_ratio` ne tient compte que des réponses valides. Ni l’une ni l’autre n’est une probabilité calibrée, et l’accord ne garantit pas l’exactitude factuelle.
 - Les verrous d’équipe s’appuient sur des fichiers de réservation créés atomiquement et des registres de présence par participant pour coordonner les processus coopérants. Ces verrous sont coopératifs, ne sont pas imposés par le système d’exploitation et n’empêchent pas les écritures de processus qui ignorent ou modifient le protocole.
 - Le programme hérite de l’environnement et des autorisations de son appelant. `RunAsInvoker` ne constitue pas un bac à sable du système d’exploitation et ne garantit pas l’absence d’élévation de privilèges.
-- Les cibles de traduction `de`, `en`, `es`, `zh`, `ja` et `ru` sont des langues de sortie, pas six langues d’interface localisées. L’aide du CLI mêle l’anglais et l’allemand ; l’IHM expérimentale en Tk utilise des libellés allemands.
+- Les cibles de traduction `de`, `en`, `es`, `zh`, `ja` et `ru` sont des langues de sortie, pas six langues d’interface localisées. L’aide du CLI est en anglais ; certains messages de progression à l’exécution sont encore en allemand ; l’IHM expérimentale en Tk utilise des libellés allemands.
 - Le fichier de benchmark [`results/benchmark_20260306.json`](results/benchmark_20260306.json) consigne une charge de travail historique. Ses mesures ne permettent pas de prédire les performances générales.
 
 Vous trouverez davantage de détails sur l’implémentation dans [Architecture et coordination](docs/ARCHITECTURE.md). Les tâches actuellement ouvertes figurent sous [Tâches ouvertes dans `TODO.md`](TODO.md#offene-aufgaben).
@@ -65,12 +65,15 @@ Vous trouverez davantage de détails sur l’implémentation dans [Architecture 
 
 La version `0.1.3` est déclarée dans `pyproject.toml` ; ces métadonnées seules ne signifient pas qu’un paquet a été publié. Le code source de ce dépôt est sous licence [MIT](LICENSE). [`THIRD_PARTY_LICENSES.md`](THIRD_PARTY_LICENSES.md) répertorie une sélection de dépendances déclarées et ne constitue ni un audit des dépendances transitives ni une conclusion générale sur l’autorisation d’un usage commercial.
 
-Signalez les vulnérabilités via [GitHub Security Advisories](https://github.com/ellmos-ai/swarm_ai/security/advisories/new) ou à une adresse indiquée dans [`SECURITY.md`](SECURITY.md). Le projet ne publie aucun SLA sur les délais de réponse. Consultez le [workflow GitHub Actions](https://github.com/ellmos-ai/swarm_ai/actions/workflows/ci.yml) en direct pour connaître l’état actuel de la CI.
+Signalez les vulnérabilités via [GitHub Security Advisories](https://github.com/ellmos-ai/swarm_ai/security/advisories/new) ; le signalement privé de vulnérabilités est activé pour ce dépôt et [`SECURITY.md`](SECURITY.md) précise les informations à fournir. Le projet ne publie aucun SLA sur les délais de réponse. Consultez le [workflow GitHub Actions](https://github.com/ellmos-ai/swarm_ai/actions/workflows/ci.yml) en direct pour connaître l’état actuel de la CI.
 
 Voir [`README_de.md`](README_de.md) pour la présentation allemande, [`README_es.md`](README_es.md) pour la présentation espagnole et [`CHANGELOG.md`](CHANGELOG.md) pour l’historique daté du projet.
 
 ## Projets associés
 
 - [COMA](https://github.com/ellmos-ai/coma) — une passerelle facultative entre Spawner et les adaptateurs de fournisseurs, utilisée par Swarm lorsque l’option `providers` est installée.
-- [Roshambo](https://github.com/ellmos-ai/roshambo) — une boîte à outils distincte pour coordonner des agents lancés indépendamment à l’aide de baux sérialisables et d’une mémoire des résultats.
 - [MarbleRun](https://github.com/ellmos-ai/marblerun) — une boîte à outils distincte pour configurer des chaînes multi-agents.
+- [clutch](https://github.com/ellmos-ai/clutch) — fournit la capacité `routing.default` que ce module déclare comme facultative dans `ellmos-module.v2.json`.
+- [lock-master](https://github.com/ellmos-ai/lock-master) — le système complet de verrous de fichiers (verrous exclusifs et d’équipe avec portée et expiration) ; ici, `tools/team_lock.py` n’est qu’un petit protocole coopératif de réservation pour les processus qui le respectent.
+- [ellmos-scheduler](https://github.com/ellmos-ai/ellmos-scheduler) — exécute des tâches cron et à intervalle avec des baux et des reçus d’exécution ; il permet de lancer des essaims selon un calendrier.
+- [compare-race](https://github.com/ellmos-ai/compare-race) — envoie un prompt à plusieurs modèles et laisse un modèle juger les réponses — une comparaison qualitative, alors que `swarm-consensus` compte les réponses identiques.

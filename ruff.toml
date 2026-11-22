@@ -1,11 +1,18 @@
-# Pin the lint rule set explicitly. This repository has no pyproject.toml, and
-# CI installs an unpinned `ruff`, so `ruff check` would otherwise follow whatever
-# default the freshly installed version ships. ruff widens that default between
-# releases (0.16 added UP006/UP009/UP045, BLE001, RUF100, DTZ005 and more), which
-# turned a green build red on 2026-07-24 without any code change. Selecting the
-# classic default set keeps the result independent of the installed ruff version.
-# Widening this list is a deliberate decision, tracked on the roadmap.
+# Single source of truth for the lint configuration.
+#
+# ruff reads ruff.toml in preference to pyproject.toml, so a second
+# [tool.ruff] block in pyproject.toml is silently ignored. Until 2026-11-21
+# such a block existed and advertised an expanded rule set
+# ("E4","E7","E9","F","W","I","B","SIM","C4","RUF"); it never ran. Checking
+# the code against it finds 20 issues (18x I001 unsorted imports, RUF001,
+# SIM108), so keep it here only once it has been adopted deliberately.
+#
+# The rule set is pinned explicitly because CI installs an unpinned ruff and
+# ruff widens its default selection between releases (0.16 added UP006,
+# UP009, UP045, BLE001, RUF100, DTZ005 and more), which turned a green build
+# red on 2026-07-24 without any code change.
 target-version = "py310"
+line-length = 120
 
 [lint]
 select = ["E4", "E7", "E9", "F"]

@@ -70,12 +70,18 @@ def test_gitignore_multi_host_conflict_and_lock_defense():
         assert pattern in gitignore_text, f"Pattern '{pattern}' missing from .gitignore"
 
 
-def test_ruff_configuration_parity():
+def test_ruff_configuration_has_a_single_effective_source():
+    """ruff prefers ruff.toml over pyproject.toml.
+
+    This test used to require an expanded rule set in pyproject.toml. That
+    block was shadowed by ruff.toml and never ran, so the test protected a
+    dead configuration. It now enforces one effective source.
+    """
     pyproject_text = (ROOT / "pyproject.toml").read_text(encoding="utf-8")
-    assert "[tool.ruff]" in pyproject_text
-    assert 'target-version = "py310"' in pyproject_text
-    for rule in ("E4", "E7", "E9", "F", "W", "I", "B", "SIM", "C4", "RUF"):
-        assert f'"{rule}"' in pyproject_text
+    assert "[tool.ruff" not in pyproject_text, "a second ruff config would be ignored"
+    ruff_text = (ROOT / "ruff.toml").read_text(encoding="utf-8")
+    assert 'target-version = "py310"' in ruff_text
+    assert 'select = ["E4", "E7", "E9", "F"]' in ruff_text
 
 
 def test_pep621_license_files_contract():
@@ -103,3 +109,39 @@ def test_utf8_integrity_across_markdown():
     for markdown_file in markdown_files:
         content = markdown_file.read_text(encoding="utf-8")
         assert "\ufffd" not in content, f"Replacement character detected in {markdown_file}"
+
+
+def test_security_reporting_uses_only_the_enabled_advisory_channel():
+    """SECURITY.md once listed four e-mail addresses that could not receive mail.
+
+    Two domains did not resolve and one had no mail exchanger, so every report
+    sent there was silently lost. The only supported channel is GitHub's
+    private vulnerability reporting; no README may point readers at addresses.
+    """
+    import re
+
+    advisory = "https://github.com/ellmos-ai/swarm_ai/security/advisories/new"
+    security = (ROOT / "SECURITY.md").read_text(encoding="utf-8")
+    assert security.count(advisory) == 2  # English and German section
+    listed = re.findall(r"`[^`\s]+@[^`\s]+\.[a-z]{2,}`", security)
+    assert listed == [], f"SECURITY.md lists e-mail addresses again: {listed}"
+    for readme in sorted(ROOT.glob("README*.md")):
+        text = readme.read_text(encoding="utf-8")
+        assert advisory in text, f"{readme.name} lost the advisory link"
+        assert "@ellmos.ai" not in text and "@open-bricks.org" not in text
+
+
+def test_cli_help_of_every_entry_point_is_english():
+    """The README promises English CLI help; this used to be German in four tools."""
+    import re
+    import subprocess
+    import sys
+
+    german = re.compile(r"[äöüÄÖÜß]|\b(und|nicht|für|Anzahl|Ausgabe|Nur|anzeigen)\b")
+    for module in ("benchmark", "consensus_swarm", "translate_swarm", "summarize_chunks", "stigmergy_init"):
+        out = subprocess.run(
+            [sys.executable, "-m", f"tools.{module}", "--help"],
+            cwd=ROOT, capture_output=True, text=True, encoding="utf-8", timeout=60, check=True,
+        ).stdout
+        hits = sorted({m.group(0) for m in german.finditer(out)})
+        assert hits == [], f"tools.{module} --help still contains German: {hits}"

@@ -23,12 +23,12 @@ These are libraries and examples, not a hosted agent service or production relia
 - Team-lock claims are cooperative file-based coordination signals. Processes that ignore or edit the protocol can bypass them.
 - Consensus, translation, and summarization require positive finite estimated-cost caps. `ClaudeRunner` has an optional cap; no single universal cap applies to every provider or workflow.
 - The application runs with the caller's environment and permissions. `RunAsInvoker` is not an OS sandbox and does not guarantee non-elevation.
-- The translation tool supports target text languages `de`, `en`, `es`, `zh`, `ja`, and `ru`. These are translation targets, not six localized UI languages. CLI help mixes English and German; the experimental Tk GUI has German labels.
+- The translation tool supports target text languages `de`, `en`, `es`, `zh`, `ja`, and `ru`. These are translation targets, not six localized UI languages. CLI help is English; some runtime progress messages are still German; the experimental Tk GUI has German labels.
 
 ## Useful files
 
 - `README.md`, `README_de.md`, `README_es.md`, `README_ja.md`, `README_ru.md`, `README_zh.md`, `README_fr.md`, `README_hi.md`, `README_ar.md`, `README_bn.md`, `README_pt.md`: complete project overviews and usage examples in English, German, Spanish, Japanese, Russian, Simplified Chinese, French, Hindi, Arabic, Bengali, and Portuguese.
-- `SECURITY.md`: data flow, execution limits, and private vulnerability-reporting channels
+- `SECURITY.md`: data flow, execution limits, and the private vulnerability-reporting channel (GitHub Security Advisories)
 - `THIRD_PARTY_LICENSES.md`: selected declared dependencies; not a transitive dependency audit
 - `TODO.md`: current open tasks under `## Offene Aufgaben`
 - `CHANGELOG.md`: historical changes; older statements may be superseded by later clarification
@@ -43,5 +43,8 @@ CI configuration covers Ubuntu, Windows, and macOS with Python 3.10–3.13. Cons
 ## Related projects
 
 - [COMA](https://github.com/ellmos-ai/coma): optional Spawner/adapter provider bridge used by Swarm when the `providers` extra is installed.
-- [Roshambo](https://github.com/ellmos-ai/roshambo): separate toolkit for coordinating independently launched agents through serializable leases and outcome memory.
 - [MarbleRun](https://github.com/ellmos-ai/marblerun): separate toolkit for configuring multi-agent chains.
+- [clutch](https://github.com/ellmos-ai/clutch): provides the `routing.default` capability that this module lists as optional in `ellmos-module.v2.json`; swarm-ai does not call it directly.
+- [lock-master](https://github.com/ellmos-ai/lock-master): the full file-lock system (exclusive and team locks with scopes and expiry); `tools/team_lock.py` here is a small cooperative claim protocol for processes that follow it.
+- [ellmos-scheduler](https://github.com/ellmos-ai/ellmos-scheduler): runs cron and interval jobs with leases and run receipts; use it to start swarm jobs on a schedule.
+- [compare-race](https://github.com/ellmos-ai/compare-race): sends one prompt to several models and lets a model judge the answers — qualitative comparison, where `swarm-consensus` counts identical answers.

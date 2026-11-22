@@ -56,7 +56,7 @@ Die Grenze ist eine positive, endliche Schätzungsgrenze des Werkzeugs; die Prov
 - `confidence` beim Konsens ist die Anzahl der Gewinnerstimmen geteilt durch alle Worker-Ergebnisse; `agreement_ratio` berücksichtigt nur gültige Antworten. Keiner der Werte ist eine kalibrierte Wahrscheinlichkeit, und Übereinstimmung beweist keine Richtigkeit.
 - Team-Locks nutzen atomare Datei-Claims und getrennte Anwesenheitseinträge zur Koordination kooperierender Prozesse. Sie verhindern keine Schreibzugriffe von Prozessen, die das Verfahren ignorieren oder verändern.
 - Das Programm übernimmt die Umgebung und Berechtigungen des aufrufenden Kontos. `RunAsInvoker` ist keine Betriebssystem-Sandbox und garantiert keine Ausführung ohne erhöhte Rechte.
-- Die Übersetzungsziele `de`, `en`, `es`, `zh`, `ja` und `ru` sind Ausgabe-Sprachen und keine sechs lokalisierten UI-Sprachen. Die CLI-Hilfe mischt Englisch und Deutsch; die experimentelle Tk-GUI hat deutsche Beschriftungen.
+- Die Übersetzungsziele `de`, `en`, `es`, `zh`, `ja` und `ru` sind Ausgabe-Sprachen und keine sechs lokalisierten UI-Sprachen. Die CLI-Hilfe ist englisch, einzelne Laufzeit-Fortschrittsmeldungen sind noch deutsch; die experimentelle Tk-GUI hat deutsche Beschriftungen.
 - Die Benchmark-Datei [`results/benchmark_20260306.json`](results/benchmark_20260306.json) dokumentiert einen historischen Lauf mit einer bestimmten Arbeitslast. Die Messwerte sagen keine allgemeine Leistung voraus.
 
 Mehr Implementierungsdetails stehen unter [Architektur und Koordination](docs/ARCHITECTURE.md). Aktuelle Aufgaben sind im Abschnitt [Offene Aufgaben in `TODO.md`](TODO.md#offene-aufgaben) aufgeführt.
@@ -65,12 +65,15 @@ Mehr Implementierungsdetails stehen unter [Architektur und Koordination](docs/AR
 
 Die Paketmetadaten in `pyproject.toml` weisen Version `0.1.3` aus; daraus folgt keine Veröffentlichung des Pakets. Für den Quellcode dieses Repositorys gilt die [MIT-Lizenz](LICENSE). [`THIRD_PARTY_LICENSES.md`](THIRD_PARTY_LICENSES.md) nennt ausgewählte deklarierte Abhängigkeiten. Die Liste ist weder eine vollständige Prüfung transitiver Abhängigkeiten noch eine pauschale Aussage zur kommerziellen Nutzung.
 
-Melde Schwachstellen über [GitHub Security Advisories](https://github.com/ellmos-ai/swarm_ai/security/advisories/new) oder eine der in [`SECURITY.md`](SECURITY.md) genannten Adressen. Das Projekt veröffentlicht keine Reaktionsfrist. Den aktuellen CI-Status zeigt der Live-[GitHub-Actions-Workflow](https://github.com/ellmos-ai/swarm_ai/actions/workflows/ci.yml).
+Melde Schwachstellen über [GitHub Security Advisories](https://github.com/ellmos-ai/swarm_ai/security/advisories/new); die private Schwachstellenmeldung ist für dieses Repository aktiviert, und [`SECURITY.md`](SECURITY.md) nennt, was ein Bericht enthalten sollte. Das Projekt veröffentlicht keine Reaktionsfrist. Den aktuellen CI-Status zeigt der Live-[GitHub-Actions-Workflow](https://github.com/ellmos-ai/swarm_ai/actions/workflows/ci.yml).
 
 Die englische Übersicht steht in [`README.md`](README.md), die spanische in [`README_es.md`](README_es.md) und die datierte Projekthistorie im [`CHANGELOG.md`](CHANGELOG.md).
 
 ## Verwandte Projekte
 
 - [COMA](https://github.com/ellmos-ai/coma): eine optionale Provider-Brücke; mit installierter `providers`-Zusatzabhängigkeit nutzt Swarm die Spawner- und Adapter-API von COMA.
-- [Roshambo](https://github.com/ellmos-ai/roshambo): ein eigenständiges Werkzeug zur Koordination unabhängig gestarteter Agenten mit serialisierbaren Leases und Ergebnisspeicher.
 - [MarbleRun](https://github.com/ellmos-ai/marblerun): ein eigenständiges Toolkit zum Konfigurieren von Multi-Agent-Ketten.
+- [clutch](https://github.com/ellmos-ai/clutch): stellt die Fähigkeit `routing.default` bereit, die dieses Modul in `ellmos-module.v2.json` als optional führt; swarm-ai ruft clutch nicht selbst auf.
+- [lock-master](https://github.com/ellmos-ai/lock-master): das vollständige Datei-Lock-System (exklusive und Team-Locks mit Geltungsbereich und Ablauf); `tools/team_lock.py` ist hier nur ein kleines kooperatives Claim-Protokoll für Prozesse, die sich daran halten.
+- [ellmos-scheduler](https://github.com/ellmos-ai/ellmos-scheduler): führt Cron- und Intervall-Jobs mit Leases und Laufbelegen aus; damit lassen sich Schwarmläufe zeitgesteuert starten.
+- [compare-race](https://github.com/ellmos-ai/compare-race): schickt einen Prompt an mehrere Modelle und lässt ein Modell die Antworten bewerten — ein qualitativer Vergleich, während `swarm-consensus` gleiche Antworten zählt.

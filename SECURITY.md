@@ -21,12 +21,9 @@ Some commands require positive finite estimated-cost caps: consensus, translatio
 
 ### Reporting a vulnerability
 
-Please avoid public issue details while a vulnerability is unresolved. Submit a private report through [GitHub Security Advisories](https://github.com/ellmos-ai/swarm_ai/security/advisories/new), or contact a maintainer at one of these addresses:
+Please avoid public issue details while a vulnerability is unresolved. Submit a private report through [GitHub Security Advisories](https://github.com/ellmos-ai/swarm_ai/security/advisories/new) (**Security → Report a vulnerability** on the repository page). Private vulnerability reporting is enabled for this repository; it is the only supported reporting channel.
 
-- `security@ellmos.ai`
-- `security@open-bricks.org`
-- `support@lukasgeiger.com`
-- `lukas@open-bricks.org`
+Earlier versions of this file also listed four e-mail addresses. None of them could receive mail: two of the domains do not resolve and the third has no mail exchanger (checked 2026-11-21). They were removed so that no report is sent to an address where it would be lost.
 
 Include the affected component, a concise description, reproduction steps, and potential impact. Do not include API keys, passwords, or private production data. The project does not publish a response-time or remediation SLA.
 
@@ -49,11 +46,8 @@ Einige Befehle verlangen positive, endliche Kostenschätzungsgrenzen: Konsens, �
 
 ### Schwachstelle melden
 
-Bitte veröffentlichen Sie Details zu einer ungelösten Schwachstelle nicht in einem öffentlichen Issue. Senden Sie einen vertraulichen Bericht über [GitHub Security Advisories](https://github.com/ellmos-ai/swarm_ai/security/advisories/new) oder kontaktieren Sie die Maintainer unter einer dieser Adressen:
+Bitte veröffentlichen Sie Details zu einer ungelösten Schwachstelle nicht in einem öffentlichen Issue. Senden Sie einen vertraulichen Bericht über [GitHub Security Advisories](https://github.com/ellmos-ai/swarm_ai/security/advisories/new) (**Security → Report a vulnerability** auf der Repository-Seite). Die private Schwachstellenmeldung ist für dieses Repository aktiviert; sie ist der einzige unterstützte Meldeweg.
 
-- `security@ellmos.ai`
-- `security@open-bricks.org`
-- `support@lukasgeiger.com`
-- `lukas@open-bricks.org`
+Frühere Fassungen dieser Datei nannten zusätzlich vier E-Mail-Adressen. Keine davon konnte Post empfangen: Zwei der Domains lösen nicht auf, die dritte hat keinen Mailserver (geprüft am 2026-11-21). Sie wurden entfernt, damit kein Bericht an eine Adresse geht, an der er verloren wäre.
 
 Nennen Sie die betroffene Komponente, eine kurze Beschreibung, Reproduktionsschritte und mögliche Auswirkungen. Fügen Sie keine API-Schlüssel, Passwörter oder vertraulichen Produktionsdaten bei. Das Projekt veröffentlicht keine Reaktions- oder Behebungsfrist.

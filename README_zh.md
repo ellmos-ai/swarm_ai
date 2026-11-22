@@ -56,7 +56,7 @@ swarm-consensus --question "What is the capital of Australia?" --agents 3 --max-
 - 共识结果中的 `confidence` 是支持胜出答案的结果数除以所有工作者结果数；`agreement_ratio` 仅以有效答案为分母。二者都不是经过校准的概率，一致性也不能证明答案在事实上正确。
 - 团队锁通过原子化的文件认领和每位参与者的出席记录来协调遵守协议的进程。它们无法阻止忽略或修改该协议的进程写入。
 - 程序继承调用者的环境和权限。`RunAsInvoker` 不是操作系统沙箱，也不保证程序不会以提升的权限运行。
-- 翻译目标 `de`、`en`、`es`、`zh`、`ja` 和 `ru` 是输出语言，并不代表界面有六种本地化语言。CLI 帮助混用英语和德语；实验性的 Tk GUI 使用德语标签。
+- 翻译目标 `de`、`en`、`es`、`zh`、`ja` 和 `ru` 是输出语言，并不代表界面有六种本地化语言。CLI 帮助为英语，部分运行时进度消息仍为德语；实验性的 Tk GUI 使用德语标签。
 - 基准测试文件 [`results/benchmark_20260306.json`](results/benchmark_20260306.json) 记录了一次历史工作负载。其测量结果无法预测一般情况下的性能。
 
 更多实现细节请见[架构与协作](docs/ARCHITECTURE.md)。当前未完成的任务见 [`TODO.md` 中的未完成任务](TODO.md#offene-aufgaben)。
@@ -65,12 +65,15 @@ swarm-consensus --question "What is the capital of Australia?" --agents 3 --max-
 
 `pyproject.toml` 中声明的版本为 `0.1.3`；仅有这项元数据并不意味着该软件包已发布。本仓库的源代码采用 [MIT](LICENSE) 许可。[`THIRD_PARTY_LICENSES.md`](THIRD_PARTY_LICENSES.md) 列出部分已声明依赖项；它不构成传递依赖审计，也不构成对商业用途的一概认定。
 
-请通过 [GitHub Security Advisories](https://github.com/ellmos-ai/swarm_ai/security/advisories/new) 或 [`SECURITY.md`](SECURITY.md) 中列出的地址报告漏洞。该项目没有公布响应时间 SLA。请查看实时的 [GitHub Actions 工作流](https://github.com/ellmos-ai/swarm_ai/actions/workflows/ci.yml) 了解当前 CI 状态。
+请通过 [GitHub Security Advisories](https://github.com/ellmos-ai/swarm_ai/security/advisories/new) 私下报告漏洞（本仓库已启用私密漏洞报告）；报告应包含的内容见 [`SECURITY.md`](SECURITY.md)。该项目没有公布响应时间 SLA。请查看实时的 [GitHub Actions 工作流](https://github.com/ellmos-ai/swarm_ai/actions/workflows/ci.yml) 了解当前 CI 状态。
 
 参阅 [`README_de.md`](README_de.md) 查看德语概览，参阅 [`README_es.md`](README_es.md) 查看西班牙语概览；项目的历史变更记录见 [`CHANGELOG.md`](CHANGELOG.md)。
 
 ## 相关项目
 
 - [COMA](https://github.com/ellmos-ai/coma) — 一个可选的 Spawner/adapter 提供方桥接层；安装 `providers` 扩展后，Swarm 会使用它。
-- [Roshambo](https://github.com/ellmos-ai/roshambo) — 一个独立工具包，通过可序列化租约和结果记忆来协调独立启动的智能体。
 - [MarbleRun](https://github.com/ellmos-ai/marblerun) — 一个用于配置多智能体链的独立工具包。
+- [clutch](https://github.com/ellmos-ai/clutch) — 提供本模块在 `ellmos-module.v2.json` 中列为可选的 `routing.default` 能力。
+- [lock-master](https://github.com/ellmos-ai/lock-master) — 完整的文件锁系统（带作用域和过期时间的独占锁与团队锁）；本仓库的 `tools/team_lock.py` 只是供遵守它的进程使用的小型协作式认领协议。
+- [ellmos-scheduler](https://github.com/ellmos-ai/ellmos-scheduler) — 以租约和运行凭据执行 cron 与间隔任务，可用于按计划启动 Swarm 运行。
+- [compare-race](https://github.com/ellmos-ai/compare-race) — 把同一提示发送给多个模型，并由一个模型评判答案——这是定性比较，而 `swarm-consensus` 统计的是相同答案。

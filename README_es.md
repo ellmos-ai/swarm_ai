@@ -56,7 +56,7 @@ Consulta `--help` de cada comando para ver sus opciones. El consenso, la traducc
 - En el consenso, `confidence` es el número de votos del ganador dividido entre todos los resultados de los trabajadores; `agreement_ratio` se calcula solo con las respuestas válidas. Ninguno de los dos valores es una probabilidad calibrada, y la concordancia no demuestra que los datos sean correctos.
 - Los bloqueos de equipo usan reclamaciones atómicas de archivos y registros de asistencia por participante para coordinar procesos que cooperan. No impiden escrituras de procesos que ignoren o modifiquen el protocolo.
 - El programa hereda el entorno y los permisos del proceso que lo invoca. `RunAsInvoker` no es un entorno aislado del sistema operativo ni garantiza que el programa no se ejecute con privilegios elevados.
-- Los idiomas de destino de la traducción `de`, `en`, `es`, `zh`, `ja` y `ru` son idiomas de salida, no seis idiomas de una interfaz localizada. La ayuda de CLI combina inglés y alemán; la GUI experimental de Tk tiene etiquetas en alemán.
+- Los idiomas de destino de la traducción `de`, `en`, `es`, `zh`, `ja` y `ru` son idiomas de salida, no seis idiomas de una interfaz localizada. La ayuda de CLI está en inglés; algunos mensajes de progreso en tiempo de ejecución siguen en alemán; la GUI experimental de Tk tiene etiquetas en alemán.
 - El archivo de benchmark [`results/benchmark_20260306.json`](results/benchmark_20260306.json) registra una carga de trabajo histórica. Sus mediciones no predicen el rendimiento general.
 
 Encontrarás más detalles de implementación en [Arquitectura y coordinación](docs/ARCHITECTURE.md). Las tareas abiertas actuales están en [Tareas abiertas de `TODO.md`](TODO.md#offene-aufgaben).
@@ -65,12 +65,15 @@ Encontrarás más detalles de implementación en [Arquitectura y coordinación](
 
 `pyproject.toml` declara la versión `0.1.3`; esos metadatos por sí solos no implican que se haya publicado un paquete. El código fuente de este repositorio está bajo la [licencia MIT](LICENSE). [`THIRD_PARTY_LICENSES.md`](THIRD_PARTY_LICENSES.md) enumera algunas dependencias declaradas; no es una auditoría de dependencias transitivas ni una determinación general sobre el uso comercial.
 
-Informa de vulnerabilidades mediante [GitHub Security Advisories](https://github.com/ellmos-ai/swarm_ai/security/advisories/new) o a una dirección indicada en [`SECURITY.md`](SECURITY.md). El proyecto no publica un SLA de tiempo de respuesta. Consulta el [flujo de trabajo de GitHub Actions](https://github.com/ellmos-ai/swarm_ai/actions/workflows/ci.yml) en vivo para ver el estado actual de CI.
+Informa de vulnerabilidades mediante [GitHub Security Advisories](https://github.com/ellmos-ai/swarm_ai/security/advisories/new); la notificación privada de vulnerabilidades está activada en este repositorio y [`SECURITY.md`](SECURITY.md) indica qué incluir. El proyecto no publica un SLA de tiempo de respuesta. Consulta el [flujo de trabajo de GitHub Actions](https://github.com/ellmos-ai/swarm_ai/actions/workflows/ci.yml) en vivo para ver el estado actual de CI.
 
 Consulta [`README_de.md`](README_de.md) para la descripción general en alemán, [`README.md`](README.md) para la versión en inglés y [`CHANGELOG.md`](CHANGELOG.md) para el historial fechado del proyecto.
 
 ## Proyectos relacionados
 
 - [COMA](https://github.com/ellmos-ai/coma) — un puente opcional de proveedor Spawner/adaptador que Swarm usa cuando está instalado el extra `providers`.
-- [Roshambo](https://github.com/ellmos-ai/roshambo) — un conjunto de herramientas independiente para coordinar agentes iniciados por separado mediante leases serializables y memoria de resultados.
 - [MarbleRun](https://github.com/ellmos-ai/marblerun) — un conjunto de herramientas independiente para configurar cadenas multiagente.
+- [clutch](https://github.com/ellmos-ai/clutch) — proporciona la capacidad `routing.default` que este módulo declara como opcional en `ellmos-module.v2.json`.
+- [lock-master](https://github.com/ellmos-ai/lock-master) — el sistema completo de bloqueos de archivos (bloqueos exclusivos y de equipo con alcance y caducidad); aquí `tools/team_lock.py` es solo un pequeño protocolo cooperativo de reclamación para procesos que lo respetan.
+- [ellmos-scheduler](https://github.com/ellmos-ai/ellmos-scheduler) — ejecuta tareas cron y por intervalo con leases y comprobantes de ejecución; sirve para lanzar ejecuciones del enjambre de forma programada.
+- [compare-race](https://github.com/ellmos-ai/compare-race) — envía un prompt a varios modelos y deja que un modelo evalúe las respuestas: una comparación cualitativa, mientras que `swarm-consensus` cuenta respuestas idénticas.

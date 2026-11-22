@@ -56,7 +56,7 @@ swarm-consensus --question "What is the capital of Australia?" --agents 3 --max-
 - कंसेंसस में `confidence` सभी वर्कर परिणामों की कुल संख्या से विभाजित विजेता के परिणामों की संख्या है; `agreement_ratio` केवल मान्य उत्तरों का उपयोग करता है। इनमें से कोई भी कैलिब्रेट की गई प्रायिकता नहीं है, और सहमति तथ्यात्मक शुद्धता सिद्ध नहीं करती।
 - टीम लॉक परमाण्विक फ़ाइल-दावों और प्रति-प्रतिभागी उपस्थिति अभिलेखों का उपयोग करके सहयोग करने वाली प्रक्रियाओं के बीच समन्वय करते हैं। वे उन प्रक्रियाओं के लेखन को नहीं रोकते जो प्रोटोकॉल की अनदेखी करती हैं या उसमें बदलाव करती हैं।
 - प्रोग्राम कॉलर का परिवेश और अनुमतियाँ विरासत में लेता है। `RunAsInvoker` ऑपरेटिंग-सिस्टम सैंडबॉक्स नहीं है और यह गारंटी नहीं देता कि प्रोग्राम उच्चतर अधिकारों के बिना चलेगा।
-- अनुवाद के लक्ष्य `de`, `en`, `es`, `zh`, `ja` और `ru` आउटपुट भाषाएँ हैं, छह स्थानीयकृत UI भाषाएँ नहीं। CLI हेल्प में अंग्रेज़ी और जर्मन मिला हुआ है; प्रयोगात्मक Tk GUI के लेबल जर्मन में हैं।
+- अनुवाद के लक्ष्य `de`, `en`, `es`, `zh`, `ja` और `ru` आउटपुट भाषाएँ हैं, छह स्थानीयकृत UI भाषाएँ नहीं। CLI हेल्प अंग्रेज़ी में है, कुछ रनटाइम प्रगति-संदेश अभी जर्मन में हैं; प्रयोगात्मक Tk GUI के लेबल जर्मन में हैं।
 - बेंचमार्क फ़ाइल [`results/benchmark_20260306.json`](results/benchmark_20260306.json) एक ऐतिहासिक कार्यभार दर्ज करती है। इसके मापन सामान्य प्रदर्शन का अनुमान नहीं बताते।
 
 कार्यान्वयन का अधिक विवरण [वास्तुकला और समन्वय](docs/ARCHITECTURE.md) में है। मौजूदा खुले कार्य [`TODO.md` में खुले कार्य](TODO.md#offene-aufgaben) के अंतर्गत हैं।
@@ -65,12 +65,15 @@ swarm-consensus --question "What is the capital of Australia?" --agents 3 --max-
 
 संस्करण `0.1.3` की घोषणा `pyproject.toml` में है; केवल यह मेटाडेटा पैकेज रिलीज़ होने का संकेत नहीं देता। इस रिपॉज़िटरी का स्रोत [MIT](LICENSE) लाइसेंस के तहत है। [`THIRD_PARTY_LICENSES.md`](THIRD_PARTY_LICENSES.md) कुछ घोषित निर्भरताओं की सूची देता है; यह पारगामी निर्भरता-जाँच या व्यावसायिक उपयोग की सार्वभौमिक मंज़ूरी नहीं है।
 
-कमज़ोरियों की सूचना [GitHub Security Advisories](https://github.com/ellmos-ai/swarm_ai/security/advisories/new) के माध्यम से दें या [`SECURITY.md`](SECURITY.md) में दिए गए किसी पते पर भेजें। परियोजना प्रतिक्रिया-समय SLA प्रकाशित नहीं करती। CI की मौजूदा स्थिति के लिए लाइव [GitHub Actions वर्कफ़्लो](https://github.com/ellmos-ai/swarm_ai/actions/workflows/ci.yml) देखें।
+कमज़ोरियों की सूचना [GitHub Security Advisories](https://github.com/ellmos-ai/swarm_ai/security/advisories/new) के माध्यम से निजी रूप से दें; इस रिपॉज़िटरी के लिए निजी कमज़ोरी-रिपोर्टिंग सक्षम है, और रिपोर्ट में क्या शामिल करें यह [`SECURITY.md`](SECURITY.md) में बताया गया है। परियोजना प्रतिक्रिया-समय SLA प्रकाशित नहीं करती। CI की मौजूदा स्थिति के लिए लाइव [GitHub Actions वर्कफ़्लो](https://github.com/ellmos-ai/swarm_ai/actions/workflows/ci.yml) देखें।
 
 जर्मन परिचय के लिए [`README_de.md`](README_de.md), स्पैनिश परिचय के लिए [`README_es.md`](README_es.md), और तारीख़वार परियोजना इतिहास के लिए [`CHANGELOG.md`](CHANGELOG.md) देखें।
 
 ## संबंधित परियोजनाएँ
 
 - [COMA](https://github.com/ellmos-ai/coma) — Swarm में `providers` एक्स्ट्रा इंस्टॉल होने पर इस्तेमाल होने वाला वैकल्पिक Spawner/adapter प्रोवाइडर ब्रिज।
-- [Roshambo](https://github.com/ellmos-ai/roshambo) — स्वतंत्र रूप से शुरू किए गए एजेंटों के समन्वय के लिए सीरियलाइज़ किए जा सकने वाले लीज़ और परिणाम-स्मृति वाला अलग टूलकिट।
 - [MarbleRun](https://github.com/ellmos-ai/marblerun) — बहु-एजेंट श्रृंखलाएँ कॉन्फ़िगर करने के लिए अलग टूलकिट।
+- [clutch](https://github.com/ellmos-ai/clutch) — वह `routing.default` क्षमता देता है जिसे यह मॉड्यूल `ellmos-module.v2.json` में वैकल्पिक बताता है।
+- [lock-master](https://github.com/ellmos-ai/lock-master) — पूरा फ़ाइल-लॉक सिस्टम (दायरे और समाप्ति वाले एक्सक्लूसिव और टीम लॉक); यहाँ `tools/team_lock.py` केवल उन प्रक्रियाओं के लिए छोटा सहयोगी क्लेम प्रोटोकॉल है जो इसका पालन करती हैं।
+- [ellmos-scheduler](https://github.com/ellmos-ai/ellmos-scheduler) — लीज़ और रन-रसीदों के साथ cron और अंतराल वाले जॉब चलाता है; इससे swarm रन तय समय पर शुरू किए जा सकते हैं।
+- [compare-race](https://github.com/ellmos-ai/compare-race) — एक प्रॉम्प्ट कई मॉडलों को भेजता है और एक मॉडल से उत्तरों का मूल्यांकन कराता है — यह गुणात्मक तुलना है, जबकि `swarm-consensus` समान उत्तर गिनता है।

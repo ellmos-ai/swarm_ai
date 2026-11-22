@@ -56,7 +56,7 @@ swarm-consensus --question "What is the capital of Australia?" --agents 3 --max-
 - コンセンサスの`confidence`は、勝者の票数を全ワーカーの結果数で割った値です。`agreement_ratio`の計算対象は有効な回答だけです。どちらも確率として較正されておらず、回答の一致は事実の正しさを証明しません。
 - チームロックは、アトミックなファイル確保と参加者ごとの出席記録を使い、協調に参加するプロセス同士を調整します。この手順を無視または変更するプロセスによる書き込みは防げません。
 - プログラムは呼び出し元の環境と権限を引き継ぎます。`RunAsInvoker`はOSのサンドボックスではなく、昇格されないことも保証しません。
-- 翻訳先の`de`、`en`、`es`、`zh`、`ja`、`ru`は出力言語であり、UIが6言語にローカライズされているという意味ではありません。CLIのヘルプは英語とドイツ語が混在し、実験的なTk GUIのラベルはドイツ語です。
+- 翻訳先の`de`、`en`、`es`、`zh`、`ja`、`ru`は出力言語であり、UIが6言語にローカライズされているという意味ではありません。CLIのヘルプは英語ですが、実行時の進行メッセージの一部はまだドイツ語で、実験的なTk GUIのラベルはドイツ語です。
 - ベンチマークファイル[`results/benchmark_20260306.json`](results/benchmark_20260306.json)が記録しているのは、過去の1つのワークロードです。その測定値から一般的な性能を予測することはできません。
 
 実装の詳しい説明は[アーキテクチャと協調](docs/ARCHITECTURE.md)にあります。現在の未完了タスクは[`TODO.md`の未完了タスク](TODO.md#offene-aufgaben)に記載されています。
@@ -65,12 +65,15 @@ swarm-consensus --question "What is the capital of Australia?" --agents 3 --max-
 
 バージョン`0.1.3`は`pyproject.toml`で宣言されていますが、そのメタデータだけではパッケージの公開を意味しません。このリポジトリのソースコードは[MITライセンス](LICENSE)で提供されています。[`THIRD_PARTY_LICENSES.md`](THIRD_PARTY_LICENSES.md)には一部の宣言済み依存関係が記載されていますが、推移的依存関係の監査ではなく、商用利用を一律に判断するものでもありません。
 
-脆弱性は[GitHub Security Advisories](https://github.com/ellmos-ai/swarm_ai/security/advisories/new)、または[`SECURITY.md`](SECURITY.md)に記載された連絡先へ報告してください。プロジェクトは応答時間のSLAを公表していません。現在のCI状況は[GitHub Actionsのワークフロー](https://github.com/ellmos-ai/swarm_ai/actions/workflows/ci.yml)で確認してください。
+脆弱性は[GitHub Security Advisories](https://github.com/ellmos-ai/swarm_ai/security/advisories/new)から非公開で報告してください（このリポジトリでは非公開の脆弱性報告が有効です）。報告に含める内容は[`SECURITY.md`](SECURITY.md)に記載しています。プロジェクトは応答時間のSLAを公表していません。現在のCI状況は[GitHub Actionsのワークフロー](https://github.com/ellmos-ai/swarm_ai/actions/workflows/ci.yml)で確認してください。
 
 ドイツ語の概要は[`README_de.md`](README_de.md)、スペイン語の概要は[`README_es.md`](README_es.md)をご覧ください。日付順のプロジェクト履歴は[`CHANGELOG.md`](CHANGELOG.md)にあります。
 
 ## 関連プロジェクト
 
 - [COMA](https://github.com/ellmos-ai/coma) — 任意で使えるSpawner／adapterプロバイダーブリッジです。`providers`追加機能をインストールすると、Swarmから利用できます。
-- [Roshambo](https://github.com/ellmos-ai/roshambo) — シリアライズ可能なリースと結果メモリーを使い、独立して起動したエージェントを連携させる別個のツールキットです。
 - [MarbleRun](https://github.com/ellmos-ai/marblerun) — 複数エージェントのチェーンを設定するための別個のツールキットです。
+- [clutch](https://github.com/ellmos-ai/clutch) — このモジュールが`ellmos-module.v2.json`で任意として挙げている`routing.default`機能を提供します。
+- [lock-master](https://github.com/ellmos-ai/lock-master) — スコープと有効期限を備えた排他ロックとチームロックの本格的なファイルロックシステムです。ここの`tools/team_lock.py`はこれに従うプロセス同士のための小さな協調型クレームプロトコルにすぎません。
+- [ellmos-scheduler](https://github.com/ellmos-ai/ellmos-scheduler) — リースと実行記録を伴うcronジョブと間隔ジョブを実行します。Swarmの実行をスケジュールで起動するのに使えます。
+- [compare-race](https://github.com/ellmos-ai/compare-race) — 1つのプロンプトを複数のモデルに送り、モデルに回答を評価させます。`swarm-consensus`が同一の回答を数えるのに対し、こちらは質的な比較です。

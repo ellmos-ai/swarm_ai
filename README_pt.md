@@ -56,7 +56,7 @@ Use `--help` em cada comando para ver as opções. Consenso, tradução e sumari
 - No consenso, `confidence` é o número de workers que deram a resposta vencedora dividido pelo total de resultados dos workers; `agreement_ratio` usa apenas respostas válidas. Nenhuma das duas é uma probabilidade calibrada, e a concordância não comprova a correção factual.
 - Os bloqueios de equipe coordenam processos cooperantes por meio de arquivos de reserva criados atomicamente e registros de presença por participante. Eles não impedem gravações de processos que ignoram ou alteram o protocolo.
 - O programa herda o ambiente e as permissões de quem o executa. `RunAsInvoker` não é uma sandbox do sistema operacional e não garante ausência de elevação de privilégios.
-- Os alvos de tradução `de`, `en`, `es`, `zh`, `ja` e `ru` são idiomas de saída; isso não significa que a interface esteja localizada nesses seis idiomas. A ajuda da CLI mistura inglês e alemão; a GUI experimental em Tk tem rótulos em alemão.
+- Os alvos de tradução `de`, `en`, `es`, `zh`, `ja` e `ru` são idiomas de saída; isso não significa que a interface esteja localizada nesses seis idiomas. A ajuda da CLI está em inglês; algumas mensagens de progresso em tempo de execução ainda estão em alemão; a GUI experimental em Tk tem rótulos em alemão.
 - O arquivo de benchmark [`results/benchmark_20260306.json`](results/benchmark_20260306.json) registra uma única carga de trabalho histórica. Suas medições não preveem o desempenho geral.
 
 Mais detalhes de implementação estão em [Arquitetura e coordenação](docs/ARCHITECTURE.md). As tarefas abertas atuais estão em [Tarefas abertas em `TODO.md`](TODO.md#offene-aufgaben).
@@ -65,12 +65,15 @@ Mais detalhes de implementação estão em [Arquitetura e coordenação](docs/AR
 
 A versão `0.1.3` está declarada em `pyproject.toml`; esses metadados, por si só, não significam que o pacote foi lançado. O código-fonte deste repositório está licenciado sob [MIT](LICENSE). [`THIRD_PARTY_LICENSES.md`](THIRD_PARTY_LICENSES.md) lista algumas dependências declaradas e não constitui uma auditoria de dependências transitivas nem uma determinação geral de que o uso comercial é permitido.
 
-Relate vulnerabilidades por meio de [GitHub Security Advisories](https://github.com/ellmos-ai/swarm_ai/security/advisories/new) ou de um endereço indicado em [`SECURITY.md`](SECURITY.md). O projeto não publica um SLA de tempo de resposta. Consulte o [workflow do GitHub Actions](https://github.com/ellmos-ai/swarm_ai/actions/workflows/ci.yml) ativo para ver o status atual da CI.
+Relate vulnerabilidades por meio de [GitHub Security Advisories](https://github.com/ellmos-ai/swarm_ai/security/advisories/new); o relato privado de vulnerabilidades está ativado neste repositório e [`SECURITY.md`](SECURITY.md) indica o que incluir. O projeto não publica um SLA de tempo de resposta. Consulte o [workflow do GitHub Actions](https://github.com/ellmos-ai/swarm_ai/actions/workflows/ci.yml) ativo para ver o status atual da CI.
 
 Consulte [`README_de.md`](README_de.md) para a visão geral em alemão, [`README_es.md`](README_es.md) para a visão geral em espanhol e [`CHANGELOG.md`](CHANGELOG.md) para o histórico datado do projeto.
 
 ## Projetos relacionados
 
 - [COMA](https://github.com/ellmos-ai/coma) — uma ponte opcional entre o Spawner e os adaptadores de provedor, usada pelo Swarm quando o extra `providers` está instalado.
-- [Roshambo](https://github.com/ellmos-ai/roshambo) — um kit separado para coordenar agentes iniciados de forma independente por meio de leases serializáveis e memória de resultados.
 - [MarbleRun](https://github.com/ellmos-ai/marblerun) — um kit separado para configurar cadeias multiagente.
+- [clutch](https://github.com/ellmos-ai/clutch) — fornece a capacidade `routing.default` que este módulo declara como opcional em `ellmos-module.v2.json`.
+- [lock-master](https://github.com/ellmos-ai/lock-master) — o sistema completo de bloqueio de arquivos (bloqueios exclusivos e de equipe com escopo e expiração); aqui, `tools/team_lock.py` é apenas um pequeno protocolo cooperativo de reserva para processos que o respeitam.
+- [ellmos-scheduler](https://github.com/ellmos-ai/ellmos-scheduler) — executa tarefas cron e por intervalo com leases e comprovantes de execução; serve para iniciar execuções do enxame de forma agendada.
+- [compare-race](https://github.com/ellmos-ai/compare-race) — envia um prompt a vários modelos e deixa um modelo avaliar as respostas — uma comparação qualitativa, enquanto `swarm-consensus` conta respostas idênticas.

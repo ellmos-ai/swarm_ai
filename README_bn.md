@@ -56,7 +56,7 @@ swarm-consensus --question "What is the capital of Australia?" --agents 3 --max-
 - কনসেনসাসে `confidence` হলো সব ওয়ার্কার ফলাফলের মোট সংখ্যা দিয়ে ভাগ করা বিজয়ী ফলাফলের সংখ্যা; `agreement_ratio` হিসাব করতে শুধু বৈধ উত্তর ব্যবহার করা হয়। কোনোটিই ক্যালিব্রেট করা সম্ভাব্যতা নয়, আর মতৈক্য তথ্যের সত্যতা প্রমাণ করে না।
 - দলীয় লকগুলো অ্যাটমিক ফাইল-দাবি এবং অংশগ্রহণকারী-প্রতি উপস্থিতির নথি ব্যবহার করে সহযোগী প্রক্রিয়াগুলোর মধ্যে সমন্বয় করে। প্রোটোকল উপেক্ষা বা সম্পাদনা করে এমন প্রক্রিয়ার লেখা এগুলো আটকায় না।
 - প্রোগ্রামটি কলকারীর পরিবেশ ও অনুমতিসমূহ উত্তরাধিকারসূত্রে পায়। `RunAsInvoker` অপারেটিং-সিস্টেম স্যান্ডবক্স নয় এবং এটি উচ্চতর অনুমতি ছাড়া চলার নিশ্চয়তা দেয় না।
-- অনুবাদের লক্ষ্য `de`, `en`, `es`, `zh`, `ja` ও `ru` হলো আউটপুট ভাষা, ছয়টি স্থানীয়কৃত UI ভাষা নয়। CLI সহায়তায় ইংরেজি ও জার্মান মিশে আছে; পরীক্ষামূলক Tk GUI-তে জার্মান লেবেল রয়েছে।
+- অনুবাদের লক্ষ্য `de`, `en`, `es`, `zh`, `ja` ও `ru` হলো আউটপুট ভাষা, ছয়টি স্থানীয়কৃত UI ভাষা নয়। CLI সহায়তা ইংরেজিতে, তবে চলাকালীন কিছু অগ্রগতি-বার্তা এখনও জার্মানে; পরীক্ষামূলক Tk GUI-তে জার্মান লেবেল রয়েছে।
 - বেঞ্চমার্ক ফাইল [`results/benchmark_20260306.json`](results/benchmark_20260306.json) একটি ঐতিহাসিক কাজের চাপ নথিভুক্ত করে। এর পরিমাপ সাধারণ কর্মদক্ষতার পূর্বাভাস দেয় না।
 
 বাস্তবায়ন সম্পর্কে আরও বিস্তারিত [স্থাপত্য ও সমন্বয়](docs/ARCHITECTURE.md)-এ আছে। বর্তমান খোলা কাজগুলি [`TODO.md`-এর খোলা কাজ](TODO.md#offene-aufgaben)-এ রয়েছে।
@@ -65,12 +65,15 @@ swarm-consensus --question "What is the capital of Australia?" --agents 3 --max-
 
 `0.1.3` সংস্করণটি `pyproject.toml`-এ ঘোষিত; শুধু এই মেটাডেটা প্যাকেজ প্রকাশিত হয়েছে এমন বোঝায় না। এই রিপোজিটরির সোর্স [MIT](LICENSE) লাইসেন্সের অধীনে। [`THIRD_PARTY_LICENSES.md`](THIRD_PARTY_LICENSES.md)-এ বেছে নেওয়া কিছু ঘোষিত নির্ভরতার তালিকা আছে; এটি পারগমনশীল নির্ভরতার নিরীক্ষা বা বাণিজ্যিক ব্যবহারের সার্বিক অনুমোদন নয়।
 
-দুর্বলতার খবর [GitHub Security Advisories](https://github.com/ellmos-ai/swarm_ai/security/advisories/new)-এ জানান, অথবা [`SECURITY.md`](SECURITY.md)-এ দেওয়া কোনো ঠিকানায় পাঠান। প্রকল্পটি সাড়া দেওয়ার সময়সীমা SLA হিসেবে প্রকাশ করে না। বর্তমান CI অবস্থা জানতে সরাসরি [GitHub Actions কর্মপ্রবাহ](https://github.com/ellmos-ai/swarm_ai/actions/workflows/ci.yml) দেখুন।
+দুর্বলতার খবর [GitHub Security Advisories](https://github.com/ellmos-ai/swarm_ai/security/advisories/new)-এ গোপনে জানান; এই রিপোজিটরিতে গোপন দুর্বলতা-রিপোর্টিং চালু আছে, এবং রিপোর্টে কী রাখতে হবে তা [`SECURITY.md`](SECURITY.md)-এ দেওয়া আছে। প্রকল্পটি সাড়া দেওয়ার সময়সীমা SLA হিসেবে প্রকাশ করে না। বর্তমান CI অবস্থা জানতে সরাসরি [GitHub Actions কর্মপ্রবাহ](https://github.com/ellmos-ai/swarm_ai/actions/workflows/ci.yml) দেখুন।
 
 জার্মান সারাংশের জন্য [`README_de.md`](README_de.md), স্প্যানিশ সারাংশের জন্য [`README_es.md`](README_es.md), এবং তারিখ-সহ প্রকল্পের ইতিহাসের জন্য [`CHANGELOG.md`](CHANGELOG.md) দেখুন।
 
 ## সংশ্লিষ্ট প্রকল্প
 
 - [COMA](https://github.com/ellmos-ai/coma) — Swarm-এ `providers` এক্সট্রা ইনস্টল থাকলে ব্যবহৃত ঐচ্ছিক Spawner/adapter প্রোভাইডার সেতু।
-- [Roshambo](https://github.com/ellmos-ai/roshambo) — স্বতন্ত্রভাবে চালু করা এজেন্টদের সমন্বয়ে সিরিয়ালাইজ করা যায় এমন লিজ ও ফলাফল-স্মৃতি ব্যবহারের পৃথক টুলকিট।
 - [MarbleRun](https://github.com/ellmos-ai/marblerun) — বহু-এজেন্ট চেইন কনফিগার করার পৃথক টুলকিট।
+- [clutch](https://github.com/ellmos-ai/clutch) — এই মডিউল `ellmos-module.v2.json`-এ যে `routing.default` সক্ষমতাকে ঐচ্ছিক হিসেবে উল্লেখ করে, সেটি সরবরাহ করে।
+- [lock-master](https://github.com/ellmos-ai/lock-master) — পূর্ণাঙ্গ ফাইল-লক ব্যবস্থা (পরিসর ও মেয়াদসহ এক্সক্লুসিভ ও টিম লক); এখানে `tools/team_lock.py` কেবল সেসব প্রক্রিয়ার জন্য একটি ছোট সহযোগিতামূলক ক্লেইম প্রোটোকল, যারা এটি মেনে চলে।
+- [ellmos-scheduler](https://github.com/ellmos-ai/ellmos-scheduler) — লিজ ও রান-রসিদসহ cron ও বিরতিভিত্তিক কাজ চালায়; এর মাধ্যমে নির্ধারিত সময়ে swarm রান শুরু করা যায়।
+- [compare-race](https://github.com/ellmos-ai/compare-race) — একটি প্রম্পট কয়েকটি মডেলে পাঠায় এবং একটি মডেলকে উত্তরগুলো বিচার করতে দেয় — এটি গুণগত তুলনা, যেখানে `swarm-consensus` অভিন্ন উত্তর গণনা করে।

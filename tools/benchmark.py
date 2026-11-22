@@ -675,31 +675,31 @@ def print_comparison(seq_results, seq_duration, par_results, par_duration, max_w
 def main():
     parser = argparse.ArgumentParser(
         prog="benchmark",
-        description="llmauto Benchmark – Vergleich sequentiell vs. parallel",
+        description="swarm-benchmark: compare sequential and parallel runs",
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
-    parser.add_argument("--run", action="store_true", help="Benchmarks tatsächlich ausführen")
-    parser.add_argument("--parallel", action="store_true", help="Nur parallele Ausführung")
-    parser.add_argument("--sequential", action="store_true", help="Nur sequentielle Ausführung")
-    parser.add_argument("--compare", action="store_true", help="Beide Modi vergleichen")
+    parser.add_argument("--run", action="store_true", help="Actually run the benchmarks (live API calls)")
+    parser.add_argument("--parallel", action="store_true", help="Run in parallel mode only")
+    parser.add_argument("--sequential", action="store_true", help="Run in sequential mode only")
+    parser.add_argument("--compare", action="store_true", help="Compare both modes")
     parser.add_argument("--dry-run", action="store_true", default=True,
-                        help="Nur Tasks anzeigen (Standard)")
-    parser.add_argument("--workers", type=int, default=3, help="Anzahl paralleler Worker (default: 3)")
+                        help="Only list the tasks (default)")
+    parser.add_argument("--workers", type=int, default=3, help="Number of parallel workers (default: 3)")
     parser.add_argument("--category", "-c", choices=list(TASK_CATALOG.keys()),
-                        help="Nur eine Kategorie benchmarken")
+                        help="Benchmark one category only")
     parser.add_argument("--model", "-m", default=DEFAULT_MODEL,
-                        help="Modell (Standard: haiku für günstige Benchmarks)")
+                        help="Model (default: haiku for low-cost benchmarks)")
     parser.add_argument("--input-cost", type=float,
-                        help="USD pro 1M Input-Tokens (für unbekannte Modelle erforderlich)")
+                        help="USD per 1M input tokens (required for unknown models)")
     parser.add_argument("--output-cost", type=float,
-                        help="USD pro 1M Output-Tokens (für unbekannte Modelle erforderlich)")
+                        help="USD per 1M output tokens (required for unknown models)")
     parser.add_argument("--timeout", type=int, default=300,
-                        help="Timeout pro Task in Sekunden (default: 300)")
+                        help="Timeout per task in seconds (default: 300)")
     parser.add_argument("--limit", type=int,
-                        help="Maximale Task-Anzahl; für Live-Läufe erforderlich")
+                        help="Maximum number of tasks; required for live runs")
     parser.add_argument("--max-budget-usd", type=float,
-                        help="Gesamtbudget; für Live-Läufe erforderlich")
-    parser.add_argument("--export", help="Ergebnisse als JSON exportieren")
+                        help="Total budget; required for live runs")
+    parser.add_argument("--export", help="Export results as JSON")
 
     args = parser.parse_args()
 
